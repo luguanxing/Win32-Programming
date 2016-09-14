@@ -2,7 +2,7 @@
 
 ------
 
-> * 使用windos API函数自动检测U盘并获得其中文件<br>Using Windows API function to check and get files from USB automatically.
+> * 使用Windows API函数自动检测U盘并获得其中文件<br>Using Windows API function to check and get files from USB automatically.
 
 ------
 
