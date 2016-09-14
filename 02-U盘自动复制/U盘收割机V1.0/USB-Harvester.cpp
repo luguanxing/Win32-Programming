@@ -22,13 +22,12 @@ HANDLE husb = NULL;
 UINT DiskType;
 
 /*-------------------------------------------------------------------------------------------
-void copy(bool default_dest);	//´¦ÀíÄ¬ÈÏ"¿ÉÒÆ¶¯´ÅÅÌ",Í³Ò»¶ªÈëfile[0], ÓĞÃû×ÖµÄ¶ªÈëfile[i]
-DWORD WINAPI hide(LPVOID);		//hideÏß³ÌËÑË÷cmd´°¿Ú£¬Ò»µ©·¢ÏÖ¼´¶ÔÆä½øĞĞÒş²Ø
-DWORD WINAPI stare(LPVOID);	//stare¼àÊÓUÅÌ£¬Ò»µ©ÍË³öactive³Éfalse
-bool checkusbname();	//Í¬ÃûµÄUÅÌ²»´¦Àí
-int checkusb();	//Ö»ÄÜ¸´ÖÆµÚÒ»¸ö²åÈëµÄUÅÌ
+DWORD WINAPI hide(LPVOID);		//hideçº¿ç¨‹æœç´¢cmdçª—å£ï¼Œä¸€æ—¦å‘ç°å³å¯¹å…¶è¿›è¡Œéšè—
+DWORD WINAPI stare(LPVOID);	//stareç›‘è§†Uç›˜ï¼Œä¸€æ—¦é€€å‡ºactiveæˆfalse
+void copy(bool default_dest);	//å¤„ç†é»˜è®¤"å¯ç§»åŠ¨ç£ç›˜",ç»Ÿä¸€ä¸¢å…¥file[0], æœ‰åå­—çš„ä¸¢å…¥file[i]
+bool checkusbname();	//åŒåçš„Uç›˜ä¸å¤„ç†
+int checkusb();	//åªèƒ½å¤åˆ¶ç¬¬ä¸€ä¸ªæ’å…¥çš„Uç›˜
 --------------------------------------------------------------------------------------------*/
-
 
 int main() {
 
