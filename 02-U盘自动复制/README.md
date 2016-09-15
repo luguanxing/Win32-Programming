@@ -2,7 +2,7 @@
 
 ------
 
-> * 使用windos API函数自动检测U盘并获得其中文件<br>Using Windows API function to check and get files from USB automatically.
+> * 使用Windows API函数自动检测U盘并获得其中文件<br>Using Windows API function to check and get files from USB automatically.
 
 ------
 
@@ -13,7 +13,6 @@
 
 <br>
 ## 收割机v1.0<br>
-<br>
 优点：能自动复制多个USB<br>
 缺点：只能检测第一个USB<br>
 

