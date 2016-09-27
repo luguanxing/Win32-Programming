@@ -14,14 +14,14 @@ char file[MAX];
 void encrypte() {
 	char c;
 	std::string filetxt = "";
-	FILE *rf = fopen(file, "rb");
+	FILE *rf = fopen(file, "rb");	//二进制打开文件读入
 	while(!feof(rf)) {
 		c = fgetc(rf);
 		filetxt += c;
 	}
 	fclose(rf);
 	int i = 0;
-	FILE *wf = fopen(file, "wb");
+	FILE *wf = fopen(file, "wb");	//二进制打开文件改写
 	while(i < filetxt.size() - 1) 
 		fputc(filetxt[i++] ^ 2, wf);	//简单进行异或加密
 	fclose(wf);
