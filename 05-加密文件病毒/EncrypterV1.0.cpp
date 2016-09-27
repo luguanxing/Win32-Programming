@@ -14,14 +14,14 @@ char file[MAX];
 void encrypte() {
 	char c;
 	std::string filetxt = "";
-	FILE *rf = fopen(file, "r");
+	FILE *rf = fopen(file, "rb");
 	while(!feof(rf)) {
 		c = fgetc(rf);
 		filetxt += c;
 	}
 	fclose(rf);
 	int i = 0;
-	FILE *wf = fopen(file, "w");
+	FILE *wf = fopen(file, "wb");
 	while(i < filetxt.size() - 1) 
 		fputc(filetxt[i++] ^ 2, wf);	//简单进行异或加密
 	fclose(wf);
@@ -34,7 +34,7 @@ void encrypte_files() {
 	sprintf(cmd, "cmd /c dir %s\\*.* /a-d /b /s >%s", src, files);	//将src目录下所有文件路径输出保存到文件列表目录fileslist.txt
 	system(cmd);
 
-	ifstream in(files);		//逐个txt文件加密
+	ifstream in(files);		//逐个文件加密
 
 	cout << "以下文件已上锁/解锁:" << endl;
 	while (!in.eof()) { 
