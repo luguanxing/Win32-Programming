@@ -6,8 +6,8 @@
 #define MAX 250
 using namespace std;
 
-char src[MAX] = "C:\\Users\\Administrator\\Desktop\\test";		//¼ÓËøÎÄ¼şÄ¿Â¼
-char files[MAX];												//ÎÄ¼şÁĞ±íÄ¿Â¼
+char src[MAX] = "C:\\Users\\Administrator\\Desktop\\test";		//åŠ é”æ–‡ä»¶ç›®å½•
+char files[MAX];	//æ–‡ä»¶åˆ—è¡¨ç›®å½•
 char cmd[MAX];
 char file[MAX];
 
@@ -23,25 +23,25 @@ void encrypte() {
 	int i = 0;
 	FILE *wf = fopen(file, "w");
 	while(i < filetxt.size() - 1) 
-		fputc(filetxt[i++] ^ 2, wf);							//¼òµ¥½øĞĞÒì»ò¼ÓÃÜ
+		fputc(filetxt[i++] ^ 2, wf);	//ç®€å•è¿›è¡Œå¼‚æˆ–åŠ å¯†
 	fclose(wf);
 }
 
 void encrypte_files() {
 	string dir = src;
-	dir += "\\fileslist.txt";
+	dir += "\\fileslist.txt";		//æ–‡ä»¶åˆ—è¡¨ç›®å½•ä¸ºfileslist.txt
 	sprintf(files, dir.c_str());
-	sprintf(cmd, "cmd /c dir %s\\*.* /a-d /b /s >%s", src, files);	//½«srcÄ¿Â¼ÏÂËùÓĞÎÄ¼şÂ·¾¶Êä³ö±£´æµ½files
+	sprintf(cmd, "cmd /c dir %s\\*.* /a-d /b /s >%s", src, files);	//å°†srcç›®å½•ä¸‹æ‰€æœ‰æ–‡ä»¶è·¯å¾„è¾“å‡ºä¿å­˜åˆ°æ–‡ä»¶åˆ—è¡¨ç›®å½•fileslist.txt
 	system(cmd);
 
-	ifstream in(files);
+	ifstream in(files);		//é€ä¸ªtxtæ–‡ä»¶åŠ å¯†
 
-	cout << "ÒÔÏÂÎÄ¼şÒÑÉÏËø/½âËø:" << endl;
+	cout << "ä»¥ä¸‹æ–‡ä»¶å·²ä¸Šé”/è§£é”:" << endl;
 	while (!in.eof()) { 
 		in.getline(file, MAX);
-		if (strcmp(file, "")==0)
+		if (strcmp(file, "")==0)	//ç»“æŸåŠ å¯†
 			break;
-		if (file == dir)
+		if (file == dir)	//è‡ªèº«ä¸åŠ å¯†
 			continue;
 		cout << file << endl;
 		encrypte();
