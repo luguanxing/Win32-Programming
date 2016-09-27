@@ -7,9 +7,9 @@
 #define MAX 250
 using namespace std;
 
-char video1[MAX] = "C:\\videos\\1597.rmvb";
-char video2[MAX] = "C:\\videos\\march.mp4";
-char video3[MAX] = "C:\\videos\\roaring.mp4";
+char video1[MAX] = "C:\\videos\\video1.mp4";
+char video2[MAX] = "C:\\videos\\video2.mp4";
+char video3[MAX] = "C:\\videos\\video3.mp4";
 
 HANDLE hfile1;
 HANDLE hfile2;
@@ -20,7 +20,7 @@ int t1;
 int t2;
 int t3;
 
-void WINAPI count1(HWND hWnd,UINT nMsg,UINT nTimerid,DWORD dwTime) {
+void WINAPI count1(HWND hWnd,UINT nMsg,UINT nTimerid,DWORD dwTime) {	//每隔1s加一
 	t1++;
 }
 void WINAPI count2(HWND hWnd,UINT nMsg,UINT nTimerid,DWORD dwTime) {
@@ -30,7 +30,7 @@ void WINAPI count3(HWND hWnd,UINT nMsg,UINT nTimerid,DWORD dwTime) {
 	t3++;
 }
 
-DWORD WINAPI hide(LPVOID) {
+DWORD WINAPI hide(LPVOID) {		//隐藏功能
 	bool check = false;
 	while (!check) {
 		HWND h = NULL;
@@ -40,7 +40,7 @@ DWORD WINAPI hide(LPVOID) {
 	return 0;
 }
 
-int checktime() {
+int checktime() {	//定时播放功能
 	::GetLocalTime(&time);
 	if (time.wMonth != 9)
 		return 0;
@@ -67,18 +67,18 @@ int main () {
 	while (true) {	
 		int status = checktime();
 		if (status == 1 && flag1) {
-			flag1 = false;
+			flag1 = false;		//防止重复播放	
 			CreateThread(NULL, 0, hide, NULL, 0, NULL);
-			ShellExecute(NULL, "open", video1, NULL, NULL, SW_SHOWMAXIMIZED | SW_MAXIMIZE);
-			SetTimer(NULL, 2, 1000, count1);
+			ShellExecute(NULL, "open", video1, NULL, NULL, SW_SHOWMAXIMIZED | SW_MAXIMIZE);		//最大化播放
+			SetTimer(NULL, 2, 1000, count1);	//倒计时功能
 			while (t1 <= 107) {
-				BlockInput(true);
+				BlockInput(true);	//播放时控制鼠标键盘移动
 				MSG   msg; 
 				GetMessage(&msg, NULL,NULL,NULL);
 				TranslateMessage(&msg);     
 				DispatchMessage(&msg); 
 			}
-			BlockInput(false);
+			BlockInput(false);	//播放完后解除控制
 			KillTimer(NULL,2);
 		} else if (status == 2 && flag2) {
 			flag2 = false;
