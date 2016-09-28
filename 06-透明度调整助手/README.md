@@ -1,0 +1,29 @@
+# 透明度调整助手
+
+------
+
+做一个程序，能够调整当前窗口的透明度
+
+> * 背景
+> * 功能
+> * 设计
+
+
+------
+
+## 背景
+![image](https://github.com/luguanxing/LGX-Projects/blob/master/06-%E9%80%8F%E6%98%8E%E5%BA%A6%E8%B0%83%E6%95%B4%E5%8A%A9%E6%89%8B/pictures/pic0.jpg?raw=true)<br>
+今天上web2.0程序设计,TA给我们讲评CSS作业，他说实际上“像素级”调试是利用工具通过对照图片和网页，即通过工具使网页窗口透明和窗口后方的标准图片进行对比<br>
+课后我问了TA是什么工具，他说是Glass2K，然后说建议我们自己写一个<br>
+于是我就写了一个简陋版<br>
+
+## 功能
+目测这种程序应该有这些功能:<br>
+1.热键开关，我用F7进行开关设置<br>
+2.调整功能，我用小键盘+-对透明度进行调整<br>
+3.区分当前窗口功能，各自的透明度改变不会互相影响<br>
+
+
+## 设计
+建立一个钩子，检测输入，同时用vector保存窗口及其透明度
+![image](https://github.com/luguanxing/LGX-Projects/blob/master/06-%E9%80%8F%E6%98%8E%E5%BA%A6%E8%B0%83%E6%95%B4%E5%8A%A9%E6%89%8B/pictures/pic1.jpg?raw=true)<br>
