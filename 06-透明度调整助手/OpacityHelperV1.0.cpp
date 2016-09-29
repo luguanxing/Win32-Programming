@@ -34,7 +34,7 @@ int checkwindowchanged(HWND hwnd) {
 		windows.push_back(hwnd);
 		values.push_back(255);
 		return -1;
-	} else {		//调整过的窗口取出状态
+	} else {	//调整过的窗口取出状态
 		return find(windows.begin(), windows.end(), hwnd) - windows.begin(); 
 	}
 }
@@ -72,7 +72,7 @@ LRESULT CALLBACK hookproc (int code, WPARAM wparam, LPARAM lparam) {
 			change(true);
 			GetWindowText(hwnd, windowname, 250);
 			cout << "Opacity of "<< windowname << " changed: " << (int)(BYTE)(values[check] - 20) << " + 20 = "  << (int)value << endl;
-		} else if (key == 109 && running) {		//检测到小键盘"-"则减少不透明度
+		} else if (key == 109 && running) {	//检测到小键盘"-"则减少不透明度
 			change(false);
 			GetWindowText(hwnd, windowname, 250);
 			cout << "Opacity of "<< windowname << " changed: " << (int)(BYTE)(values[check] + 20)<< " - 20 = " << (int)value << endl;
@@ -84,7 +84,7 @@ LRESULT CALLBACK hookproc (int code, WPARAM wparam, LPARAM lparam) {
 	return CallNextHookEx (hook, code, wparam, lparam);
  }
 
-void messageloop() {		//消息循环
+void messageloop() {	//消息循环
 	while (GetMessage (&msg, NULL, 0, 0)) {
 		TranslateMessage (&msg);
 		DispatchMessage (&msg);
