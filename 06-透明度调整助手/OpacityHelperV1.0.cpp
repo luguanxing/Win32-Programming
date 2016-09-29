@@ -18,8 +18,7 @@ bool running;
 vector<HWND> windows;
 vector<BYTE> values;
 
-
-void set() {	//ÉèÖÃÍ¸Ã÷¶È
+void set() {	//è®¾ç½®é€æ˜åº¦
 	SetWindowLong(hwnd,GWL_EXSTYLE, 0x80000); 
 	if(hInst) {
 		typedef BOOL (WINAPI *MYFUNC)(HWND, COLORREF, BYTE,DWORD); 
@@ -31,11 +30,11 @@ void set() {	//ÉèÖÃÍ¸Ã÷¶È
 }
 
 int checkwindowchanged(HWND hwnd) {
-	if (find(windows.begin(), windows.end(), hwnd) == windows.end()) {		//Î´µ÷Õû¹ıµÄ´°¿Ú½øĞĞµÇ¼Ç£¬±£´æ×´Ì¬
+	if (find(windows.begin(), windows.end(), hwnd) == windows.end()) {		//æœªè°ƒæ•´è¿‡çš„çª—å£è¿›è¡Œç™»è®°ï¼Œä¿å­˜çŠ¶æ€
 		windows.push_back(hwnd);
 		values.push_back(255);
 		return -1;
-	} else {		//µ÷Õû¹ıµÄ´°¿ÚÈ¡³ö×´Ì¬
+	} else {		//è°ƒæ•´è¿‡çš„çª—å£å–å‡ºçŠ¶æ€
 		return find(windows.begin(), windows.end(), hwnd) - windows.begin(); 
 	}
 }
@@ -43,18 +42,16 @@ int checkwindowchanged(HWND hwnd) {
 void change(bool status) {
 	if (running) {
 		hwnd = ::GetForegroundWindow();
-		check = checkwindowchanged(hwnd);	//¼ì²â´°¿ÚÊÇ·ñµÇ¼Ç¹ı
-		if (check != -1) {
-			value = values[check];
-		} else {
+		check = checkwindowchanged(hwnd);	//æ£€æµ‹çª—å£æ˜¯å¦ç™»è®°è¿‡
+		if (check == -1) 
 			value = 255;
 			check = checkwindowchanged(hwnd);
 		}
-		if (status) {	//µ÷Õû×´Ì¬+
+		if (status) {	//è°ƒæ•´çŠ¶æ€+
 			value = values[check];
 			value += 20;
 			values[check] += 20;
-		} else {	//µ÷Õû×´Ì¬-
+		} else {	//è°ƒæ•´çŠ¶æ€-
 			value = values[check];
 			value -= 20;
 			values[check] -= 20;
@@ -71,15 +68,15 @@ LRESULT CALLBACK hookproc (int code, WPARAM wparam, LPARAM lparam) {
 	key = p->vkCode;
 	if (flag) {
 		char windowname[250];
-		if (key == 107 && running) {	//¼ì²âµ½Ğ¡¼üÅÌ"+"ÔòÔö¼Ó²»Í¸Ã÷¶È
+		if (key == 107 && running) {	//æ£€æµ‹åˆ°å°é”®ç›˜"+"åˆ™å¢åŠ ä¸é€æ˜åº¦
 			change(true);
 			GetWindowText(hwnd, windowname, 250);
 			cout << "Opacity of "<< windowname << " changed: " << (int)(BYTE)(values[check] - 20) << " + 20 = "  << (int)value << endl;
-		} else if (key == 109 && running) {		//¼ì²âµ½Ğ¡¼üÅÌ"-"Ôò¼õÉÙ²»Í¸Ã÷¶È
+		} else if (key == 109 && running) {		//æ£€æµ‹åˆ°å°é”®ç›˜"-"åˆ™å‡å°‘ä¸é€æ˜åº¦
 			change(false);
 			GetWindowText(hwnd, windowname, 250);
 			cout << "Opacity of "<< windowname << " changed: " << (int)(BYTE)(values[check] + 20)<< " - 20 = " << (int)value << endl;
-		} else if (key == 118)		//¼ì²âµ½ÈÈ¼üF7ÔòÖúÊÖ¹Ø±Õ»ò¿ªÆô
+		} else if (key == 118)		//æ£€æµ‹åˆ°çƒ­é”®F7åˆ™åŠ©æ‰‹å…³é—­æˆ–å¼€å¯
 			running = !running;
 		else ;
 	} else ;
@@ -87,14 +84,14 @@ LRESULT CALLBACK hookproc (int code, WPARAM wparam, LPARAM lparam) {
 	return CallNextHookEx (hook, code, wparam, lparam);
  }
 
-void messageloop() {		//ÏûÏ¢Ñ­»·
+void messageloop() {		//æ¶ˆæ¯å¾ªç¯
 	while (GetMessage (&msg, NULL, 0, 0)) {
 		TranslateMessage (&msg);
 		DispatchMessage (&msg);
 	};
 }
 
-void sethook() {		//½¨Á¢¹³×Ó¼ì²â¼üÅÌÊäÈë
+void sethook() {		//å»ºç«‹é’©å­æ£€æµ‹é”®ç›˜è¾“å…¥
 	processid = GetCurrentThreadId();
 	hook = SetWindowsHookEx (WH_KEYBOARD_LL, &hookproc, GetModuleHandle (NULL), 0);
 	if (hook == NULL)
