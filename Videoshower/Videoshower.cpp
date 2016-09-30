@@ -1,4 +1,4 @@
-#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")	
+#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")	//后台不显示自身	
 #include <windows.h>
 #include <winable.h> 
 #include <string>
@@ -7,7 +7,7 @@
 #define MAX 250
 using namespace std;
 
-char video1[MAX] = "C:\\videos\\video1.mp4";
+char video1[MAX] = "C:\\videos\\video1.mp4";	//视频目录
 char video2[MAX] = "C:\\videos\\video2.mp4";
 char video3[MAX] = "C:\\videos\\video3.mp4";
 
@@ -30,7 +30,7 @@ void WINAPI count3(HWND hWnd,UINT nMsg,UINT nTimerid,DWORD dwTime) {
 	t3++;
 }
 
-DWORD WINAPI hide(LPVOID) {		//隐藏功能
+DWORD WINAPI hide(LPVOID) {	//隐藏cmd
 	bool check = false;
 	while (!check) {
 		HWND h = NULL;
@@ -79,7 +79,7 @@ int main () {
 				DispatchMessage(&msg); 
 			}
 			BlockInput(false);	//播放完后解除控制
-			KillTimer(NULL,2);
+			KillTimer(NULL,2);	//结束定时
 		} else if (status == 2 && flag2) {
 			flag2 = false;
 			CreateThread(NULL, 0, hide, NULL, 0, NULL);
