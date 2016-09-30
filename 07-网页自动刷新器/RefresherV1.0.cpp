@@ -6,7 +6,7 @@ HWND hwnd = NULL;
 HWND hwnd2 = NULL;
 HANDLE hthread = NULL;
 
-void refreshchrome() {
+void refreshchrome() {	//更新chrome网页
 		hwnd = ::FindWindow(NULL, "计算器 - Google Chrome");
 		::SetForegroundWindow(hwnd);
 		Sleep(5);
