@@ -6,9 +6,7 @@ HWND hwnd = NULL;
 HWND hwnd2 = NULL;
 HANDLE hthread = NULL;
 
-void refreshchrome() {	//更新chrome网页
-		hwnd2=FindWindow("Chrome_WidgetWin_1", NULL);
-		hwnd2=GetParent(hwnd2);	//要从子窗口句柄找到父窗口句柄
+void refreshchrome() {	//鏇存柊chrome缃戦〉
 		::SetForegroundWindow(hwnd2);
 		Sleep(5);
 		::SendMessage(hwnd2, WM_KEYDOWN, VK_F5, 0);
@@ -17,14 +15,17 @@ void refreshchrome() {	//更新chrome网页
 
 int main() {
 	while (true) {
-			hwnd = NULL;	//找当前记事本notepad++正在写的代码
+			hwnd = NULL;	//鎵惧綋鍓嶈浜嬫湰notepad++姝ｅ湪鍐欑殑浠ｇ爜
 			hwnd = ::FindWindow("Notepad++", NULL);
+			hwnd2 = NULL;
+			hwnd2=FindWindow("Chrome_WidgetWin_1", NULL);
+			hwnd2=GetParent(hwnd2);	//瑕佷粠瀛愮獥鍙ｅ彞鏌勬壘鍒扮埗绐楀彛鍙ユ焺
 			char textname[250];
 			GetWindowText(hwnd, textname, 250);		
-			if (hwnd == NULL || textname[0] != '*') {	//找不到忽略
+			if (hwnd == NULL || hwnd2 == NULL || textname[0] != '*') {	//鎵句笉鍒扮獥鍙ｆ垨鏈洿鏂板垯蹇界暐
 				Sleep(5);
 				continue; 
-			} else {	//找到后自动保存并更新chrome网页
+			} else {	//鎵惧埌鍚庤嚜鍔ㄤ繚瀛樺苟鏇存柊chrome缃戦〉
 				::SetForegroundWindow(hwnd);
 				keybd_event(VK_CONTROL, 0, 0 ,0);
 				keybd_event(83, 0, 0 ,0);
