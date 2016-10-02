@@ -6,19 +6,19 @@ HWND hwnd = NULL;
 HWND hwnd2 = NULL;
 HANDLE hthread = NULL;
 
-void refreshchrome() {	//¸üÐÂchromeÍøÒ³
+void refreshchrome() {	//更新chrome网页
 	::SetForegroundWindow(hwnd2);
 	Sleep(5);
 	::SendMessage(hwnd2, WM_KEYDOWN, VK_F5, 0);
 	::SendMessage(hwnd2, WM_KEYUP, VK_F5, 0);
 }
 
-void checkwindow() {
-	hwnd = NULL;	//ÕÒµ±Ç°¼ÇÊÂ±¾notepad++ÕýÔÚÐ´µÄ´úÂë
+void checkwindow() {	//找到当前记事本notepad++和浏览器chrome
+	hwnd = NULL;
 	hwnd = ::FindWindow("Notepad++", NULL);
 	hwnd2 = NULL;
 	hwnd2=FindWindow("Chrome_WidgetWin_1", NULL);
-	hwnd2=GetParent(hwnd2);		//Òª´Ó×Ó´°¿Ú¾ä±úÕÒµ½¸¸´°¿Ú¾ä±ú
+	hwnd2=GetParent(hwnd2);		//要从浏览器子窗口句柄找到父窗口句柄
 }
 
 int main() {
@@ -26,10 +26,10 @@ int main() {
 		checkwindow();
 		char textname[250];
 		GetWindowText(hwnd, textname, 250);		
-		if (hwnd == NULL || hwnd2 == NULL || textname[0] != '*') {	//ÕÒ²»µ½´°¿Ú»òÎ´¸üÐÂÔòºöÂÔ
+		if (hwnd == NULL || hwnd2 == NULL || textname[0] != '*') {	//找不到窗口或未更新则忽略
 			Sleep(5);
 			continue; 
-		} else {	//ÕÒµ½ºó×Ô¶¯±£´æ²¢¸üÐÂchromeÍøÒ³
+		} else {	//找到则自动保存notepad++并更新chrome网页
 			::SetForegroundWindow(hwnd);
 			keybd_event(VK_CONTROL, 0, 0 ,0);
 			keybd_event(83, 0, 0 ,0);
