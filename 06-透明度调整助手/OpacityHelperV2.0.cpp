@@ -44,12 +44,12 @@ void change(bool status) {
 		hwnd = ::GetForegroundWindow();
 		get();
 		if (status) {
-			if (value <= 255-2) {
+			if (value <= 255-2) {	//防突变成透明
 				value += 2;
 				set();
 			}
 		} else  {
-			if (0+2 <= value) {
+			if (0+2 <= value) {	//防突变成完全不透明
 				value -= 2;
 				set();
 			}
