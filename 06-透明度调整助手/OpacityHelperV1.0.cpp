@@ -43,7 +43,7 @@ void change(bool status) {
 	if (running) {
 		hwnd = ::GetForegroundWindow();
 		check = checkwindowchanged(hwnd);	//检测窗口是否登记过
-		if (check == -1) 
+		if (check == -1) {
 			value = 255;
 			check = checkwindowchanged(hwnd);
 		}
@@ -57,7 +57,7 @@ void change(bool status) {
 			values[check] -= 20;
 		}
 		set();
-	} else ;
+	}
 }
 
 LRESULT CALLBACK hookproc (int code, WPARAM wparam, LPARAM lparam) {
