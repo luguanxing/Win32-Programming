@@ -5,9 +5,14 @@ using namespace std;
 typedef HANDLE (WINAPI* OldOpenProcess)(DWORD, BOOL, DWORD);	//原API地址
 OldOpenProcess openprocess=NULL;	//指向原函数的指针  
 FARPROC pfOldOpenProcess=NULL;  //指向函数的远指针
+HANDLE hprocess;
+HANDLE hprocess2;
+void unhookapi();
+void hookapi();
+
 
 HANDLE WINAPI fakeOpenProcess(DWORD, BOOL, DWORD )  {		//假API定义
-	::MessageBox(NULL, "123", "123", MB_OK);
+	::MessageBox(NULL, "OpenProcess已被HOOK", "无法使用", MB_OK);
     return NULL;
 }  
 
@@ -39,41 +44,35 @@ void savecode() {
 }
 
 void hookapi() {
-	DWORD dwTemp=0;  
-	DWORD dwOldProtect=0;
-	DWORD dwPid=::GetCurrentProcessId();
-	HANDLE hProcess=OpenProcess(PROCESS_ALL_ACCESS,0,dwPid);
-	VirtualProtectEx(hProcess, pfOldOpenProcess, 5, PAGE_READWRITE, &dwOldProtect);    //改变在自身内存区域的保护属性
-	WriteProcessMemory(hProcess, pfOldOpenProcess, NewCode, 5, 0);  //修改API函数入口前5个字节为jmp xxxxxx  
-	VirtualProtectEx(hProcess, pfOldOpenProcess, 5, dwOldProtect, &dwTemp);  
+	hprocess=OpenProcess(PROCESS_ALL_ACCESS,0, ::GetCurrentProcessId());
+	WriteProcessMemory(hprocess, pfOldOpenProcess, NewCode, 5, 0);  //修改API函数入口前5个字节为jmp xxxxxx  
+}
+
+void unhookapi() {
+	hprocess=hprocess2;		//恢复当前进程句柄，不能用OpenProcess了
+	WriteProcessMemory(hprocess, pfOldOpenProcess, OldCode, 5, 0);  //修改API函数入口前5个字节为jmp xxxxxx    
 }
 
 void test() {
-    HWND h = ::FindWindow(NULL, "C:\Documents and Settings\Administrator\桌面\hookapi\Debug\1.exe");  //  寻找并打开进程
+    HWND h = ::FindWindow(NULL, "新建 文本文档.txt - 记事本");  //  寻找并打开进程
     DWORD processid = 0;
     GetWindowThreadProcessId(h, &processid);
-    HANDLE hprocess = 0;
     hprocess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processid);
+	cout << "进程句柄" << hprocess << endl;
 }
-
-void unhookapi() {   
-	DWORD dwTemp=0;  
-	DWORD dwOldProtect=0;
-	DWORD dwPid=::GetCurrentProcessId();
-	HANDLE hProcess=OpenProcess(PROCESS_ALL_ACCESS,0,dwPid);
-	VirtualProtectEx(hProcess, pfOldOpenProcess, 5, PAGE_READWRITE, &dwOldProtect);    //改变在自身内存区域的保护属性
-	WriteProcessMemory(hProcess, pfOldOpenProcess, OldCode, 5, 0);  //修改API函数入口前5个字节为jmp xxxxxx  
-	VirtualProtectEx(hProcess, pfOldOpenProcess, 5, dwOldProtect, &dwTemp);     
-}  
 
 int main() {
 	getapi();
 	savecode();
-	unhookapi();
-	hookapi();
-	test();
-	unhookapi();
-	test();
-	return 0;
 
+	test();		//hook前用OpenProcess打开记事本
+
+	hookapi();
+	hprocess2=hprocess;		//保存当前进程句柄
+	test();		//hook后用OpenProcess打开记事本
+
+	unhookapi();
+	test();		//恢复hook后用OpenProcess打开记事本
+
+	return 0;
 }
