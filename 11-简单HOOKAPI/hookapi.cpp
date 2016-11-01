@@ -2,80 +2,79 @@
 #include <iostream>
 using namespace std;
 
-typedef HANDLE (WINAPI* OldOpenProcess)(DWORD, BOOL, DWORD);	//Ô­APIµØÖ·
-OldOpenProcess openprocess=NULL;	//Ö¸ÏòÔ­º¯ÊıµÄÖ¸Õë  
-FARPROC pfOldOpenProcess=NULL;  //Ö¸Ïòº¯ÊıµÄÔ¶Ö¸Õë
-BYTE OldCode[5];	//Ô­º¯ÊıÇ°5×Ö½Ú  
-BYTE NewCode[5]; 	//¼Ùº¯ÊıÇ°5×Ö½Ú  
-HANDLE hprocess;	//½ø³Ì¾ä±ú 
-HANDLE hprocess2;	//×ÔÉí½ø³Ì¾ä±ú±¸·İ
+typedef HANDLE (WINAPI* OldOpenProcess)(DWORD, BOOL, DWORD);	//åŸAPIåœ°å€
+OldOpenProcess openprocess=NULL;	//æŒ‡å‘åŸå‡½æ•°çš„æŒ‡é’ˆ  
+FARPROC pfOldOpenProcess=NULL;  //æŒ‡å‘å‡½æ•°çš„è¿œæŒ‡é’ˆ
+BYTE OldCode[5];	//åŸå‡½æ•°å‰5å­—èŠ‚  
+BYTE NewCode[5]; 	//å‡å‡½æ•°å‰5å­—èŠ‚  
+HANDLE hprocess;	//è¿›ç¨‹å¥æŸ„ 
+HANDLE hprocess2;	//è‡ªèº«è¿›ç¨‹å¥æŸ„å¤‡ä»½
 void unhookapi();
 void hookapi();
 
-
-HANDLE WINAPI fakeOpenProcess(DWORD, BOOL, DWORD )  {		//¼ÙAPI¶¨Òå
+HANDLE WINAPI fakeOpenProcess(DWORD, BOOL, DWORD )  {	//å‡APIå®šä¹‰
 	unhookapi();
-	//ÒòÎªMessageBox»áÒı·¢OpenProcess£¬¹ÊÒªÏÈ»Ö¸´HOOK,·ñÔò»¹ÊÇµ÷ÓÃ¼Ùº¯Êı£¬´Ó¶øÔì³É¶ÑÕ»Òç³ö£¬³ÌĞò±ÀÀ£
-	::MessageBox(NULL, "OpenProcessÒÑ±»HOOK", "ÎŞ·¨Ê¹ÓÃ", MB_OK);
+	//å› ä¸ºMessageBoxä¼šå¼•å‘OpenProcessï¼Œæ•…è¦å…ˆæ¢å¤HOOK,å¦åˆ™è¿˜æ˜¯è°ƒç”¨å‡å‡½æ•°ï¼Œä»è€Œé€ æˆå †æ ˆæº¢å‡ºï¼Œç¨‹åºå´©æºƒ
+	::MessageBox(NULL, "OpenProcesså·²è¢«HOOK", "æ— æ³•ä½¿ç”¨", MB_OK);
 	hookapi();
     return NULL;
 }  
 
-void getapi() {		//»ñÈ¡Ô­APIµØÖ·
+void getapi() {		//è·å–åŸAPIåœ°å€
 	  HMODULE hmodule=::LoadLibrary("kernel32.dll");
 	  openprocess=(OldOpenProcess)::GetProcAddress(hmodule, "OpenProcess");  
 	  pfOldOpenProcess=(FARPROC)openprocess; 
 }
 
 void savecode() {
-	_asm  {		// ½«Ô­APIµÄÈë¿ÚÇ°5¸ö×Ö½Ú´úÂë±£´æµ½OldCode[]  
-		lea edi,OldCode //»ñÈ¡OldCodeÊı×éµÄµØÖ·,·Åµ½edi  
-		mov esi,pfOldOpenProcess //»ñÈ¡Ô­APIÈë¿ÚµØÖ·£¬·Åµ½esi  
-		cld    //·½Ïò±êÖ¾Î»£¬ÎªÒÔÏÂÁ½ÌõÖ¸Áî×ö×¼±¸  
-		movsd //¸´ÖÆÔ­APIÈë¿ÚÇ°4¸ö×Ö½Úµ½OldCodeÊı×é  
-		movsb //¸´ÖÆÔ­APIÈë¿ÚµÚ5¸ö×Ö½Úµ½OldCodeÊı×é  
+	_asm  {		// å°†åŸAPIçš„å…¥å£å‰5ä¸ªå­—èŠ‚ä»£ç ä¿å­˜åˆ°OldCode[]  
+		lea edi,OldCode //è·å–OldCodeæ•°ç»„çš„åœ°å€,æ”¾åˆ°edi  
+		mov esi,pfOldOpenProcess //è·å–åŸAPIå…¥å£åœ°å€ï¼Œæ”¾åˆ°esi  
+		cld    //æ–¹å‘æ ‡å¿—ä½ï¼Œä¸ºä»¥ä¸‹ä¸¤æ¡æŒ‡ä»¤åšå‡†å¤‡  
+		movsd //å¤åˆ¶åŸAPIå…¥å£å‰4ä¸ªå­—èŠ‚åˆ°OldCodeæ•°ç»„  
+		movsb //å¤åˆ¶åŸAPIå…¥å£ç¬¬5ä¸ªå­—èŠ‚åˆ°OldCodeæ•°ç»„  
 	}
 
-	_asm  {	//»ñÈ¡fakeOpenProcessµÄÏà¶ÔµØÖ·,ÎªJmp×ö×¼±¸,5¸ö×Ö½Ú 
-		lea eax,fakeOpenProcess //»ñÈ¡¼ÙAPIµÄfakeOpenProcessº¯ÊıµØÖ·  
-		mov ebx,pfOldOpenProcess  //Ô­ÏµÍ³APIº¯ÊıµØÖ·  
+	_asm  {	//è·å–fakeOpenProcessçš„ç›¸å¯¹åœ°å€,ä¸ºJmpåšå‡†å¤‡,5ä¸ªå­—èŠ‚ 
+		lea eax,fakeOpenProcess //è·å–å‡APIçš„fakeOpenProcesså‡½æ•°åœ°å€  
+		mov ebx,pfOldOpenProcess  //åŸç³»ç»ŸAPIå‡½æ•°åœ°å€  
 		sub eax,ebx           //int nAddr = UserFunAddr - SysFunAddr  
 		sub eax,5             //nAddr=nAddr-5  
-		mov dword ptr [NewCode+1],eax //Ò»¸öº¯ÊıµØÖ·Õ¼4¸ö×Ö½Ú,½«Ëã³öµÄµØÖ·nAddr±£´æµ½NewCodeºóÃæ4¸ö×Ö½Ú
+		mov dword ptr [NewCode+1],eax //ä¸€ä¸ªå‡½æ•°åœ°å€å 4ä¸ªå­—èŠ‚,å°†ç®—å‡ºçš„åœ°å€nAddrä¿å­˜åˆ°NewCodeåé¢4ä¸ªå­—èŠ‚
 	}
-	NewCode[0]=0xe9; //NewCodeµÚÒ»¸ö×Ö½ÚÎªJMP
+	NewCode[0]=0xe9; //NewCodeç¬¬ä¸€ä¸ªå­—èŠ‚ä¸ºJMP
 }
 
 void hookapi() {
 	hprocess=OpenProcess(PROCESS_ALL_ACCESS,0, ::GetCurrentProcessId());
-	WriteProcessMemory(hprocess, pfOldOpenProcess, NewCode, 5, 0);  //ĞŞ¸ÄAPIº¯ÊıÈë¿ÚÇ°5¸ö×Ö½ÚÎªjmp xxxxxx  
+	WriteProcessMemory(hprocess, pfOldOpenProcess, NewCode, 5, 0);  //ä¿®æ”¹APIå‡½æ•°å…¥å£å‰5ä¸ªå­—èŠ‚ä¸ºjmp xxxxxx  
 }
 
 void unhookapi() {
-	hprocess=hprocess2;		//»Ö¸´µ±Ç°½ø³Ì¾ä±ú£¬²»ÄÜÓÃOpenProcessÁË
-	WriteProcessMemory(hprocess, pfOldOpenProcess, OldCode, 5, 0);  //ĞŞ¸ÄAPIº¯ÊıÈë¿ÚÇ°5¸ö×Ö½ÚÎªjmp xxxxxx    
+	hprocess=hprocess2;		//æ¢å¤å½“å‰è¿›ç¨‹å¥æŸ„ï¼Œä¸èƒ½ç”¨OpenProcessäº†
+	WriteProcessMemory(hprocess, pfOldOpenProcess, OldCode, 5, 0);  //ä¿®æ”¹APIå‡½æ•°å…¥å£å‰5ä¸ªå­—èŠ‚ä¸ºjmp xxxxxx    
 }
 
 void test() {
-    HWND h = ::FindWindow(NULL, "ĞÂ½¨ ÎÄ±¾ÎÄµµ.txt - ¼ÇÊÂ±¾");  //  Ñ°ÕÒ²¢´ò¿ª½ø³Ì
+    HWND h = ::FindWindow(NULL, "æ–°å»º æ–‡æœ¬æ–‡æ¡£.txt - è®°äº‹æœ¬");  //  å¯»æ‰¾å¹¶æ‰“å¼€è¿›ç¨‹
     DWORD processid = 0;
     GetWindowThreadProcessId(h, &processid);
     hprocess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processid);
-	cout << "½ø³Ì¾ä±ú" << hprocess << endl;
+	cout << "è¿›ç¨‹å¥æŸ„" << hprocess << endl;
 }
 
 int main() {
 	getapi();
 	savecode();
 
-	test();		//hookÇ°ÓÃOpenProcess´ò¿ª¼ÇÊÂ±¾
+	test();		//hookå‰ç”¨OpenProcessæ‰“å¼€è®°äº‹æœ¬
 
 	hookapi();
-	hprocess2=hprocess;		//±£´æµ±Ç°½ø³Ì¾ä±ú
-	test();		//hookºóÓÃOpenProcess´ò¿ª¼ÇÊÂ±¾
+	hprocess2=hprocess;		//ä¿å­˜å½“å‰è¿›ç¨‹å¥æŸ„
+	test();		//hookåç”¨OpenProcessæ‰“å¼€è®°äº‹æœ¬
 
 	unhookapi();
-	test();		//»Ö¸´hookºóÓÃOpenProcess´ò¿ª¼ÇÊÂ±¾
+	test();		//æ¢å¤hookåç”¨OpenProcessæ‰“å¼€è®°äº‹æœ¬
 
 	return 0;
 }
