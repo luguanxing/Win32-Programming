@@ -5,14 +5,19 @@ using namespace std;
 typedef HANDLE (WINAPI* OldOpenProcess)(DWORD, BOOL, DWORD);	//原API地址
 OldOpenProcess openprocess=NULL;	//指向原函数的指针  
 FARPROC pfOldOpenProcess=NULL;  //指向函数的远指针
-HANDLE hprocess;
-HANDLE hprocess2;
+BYTE OldCode[5];	//原函数前5字节  
+BYTE NewCode[5]; 	//假函数前5字节  
+HANDLE hprocess;	//进程句柄 
+HANDLE hprocess2;	//自身进程句柄备份
 void unhookapi();
 void hookapi();
 
 
 HANDLE WINAPI fakeOpenProcess(DWORD, BOOL, DWORD )  {		//假API定义
+	unhookapi();
+	//因为MessageBox会引发OpenProcess，故要先恢复HOOK,否则还是调用假函数，从而造成堆栈溢出，程序崩溃
 	::MessageBox(NULL, "OpenProcess已被HOOK", "无法使用", MB_OK);
+	hookapi();
     return NULL;
 }  
 
@@ -22,8 +27,6 @@ void getapi() {		//获取原API地址
 	  pfOldOpenProcess=(FARPROC)openprocess; 
 }
 
-BYTE OldCode[5];
-BYTE NewCode[5]; 
 void savecode() {
 	_asm  {		// 将原API的入口前5个字节代码保存到OldCode[]  
 		lea edi,OldCode //获取OldCode数组的地址,放到edi  
