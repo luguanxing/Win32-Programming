@@ -1,7 +1,7 @@
 # 简单HOOKAPI
 ------
 
-做一个程序(或DLL)实现HOOK自身API，即s使用某API时不是使用系统的API，而是执行自己定义的API
+做一个程序(或DLL)实现HOOK自身API，即使用API时不是使用系统的API，而是执行自己定义的API
 
 ------
 
