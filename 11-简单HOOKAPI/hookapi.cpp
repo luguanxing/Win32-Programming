@@ -12,12 +12,14 @@ HANDLE hprocess2;	//自身进程句柄备份
 void unhookapi();
 void hookapi();
 
-HANDLE WINAPI fakeOpenProcess(DWORD, BOOL, DWORD )  {	//假API定义
+HANDLE WINAPI fakeOpenProcess(DWORD, BOOL, DWORD )  {	//假API定
+	/*
 	unhookapi();
-	//因为MessageBox会引发OpenProcess，故要先恢复HOOK,否则还是调用假函数，从而造成堆栈溢出，程序崩溃
+	//因为MessageBox会引发OpenProcess，故要先恢复HOOK,否则还是调用假函数，从而造成堆栈溢出，程序崩溃，可改用cout
 	::MessageBox(NULL, "OpenProcess已被HOOK", "无法使用", MB_OK);
 	hookapi();
-    return NULL;
+	*/
+	return NULL;
 }  
 
 void getapi() {		//获取原API地址
