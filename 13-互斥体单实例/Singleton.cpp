@@ -5,7 +5,7 @@ using namespace std;
 
 int main() {
 
-	HANDLE hobj = ::CreateMutex(NULL, false, "test-object");
+	HANDLE hobj = ::CreateMutex(NULL, false, "test-object");	//创建一个互斥体对象实例
 
 	if (::GetLastError() == ERROR_ALREADY_EXISTS) {
 		::MessageBox(NULL, "不能运行多个实例", "错误", MB_OK);
