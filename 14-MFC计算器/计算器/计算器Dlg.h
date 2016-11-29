@@ -1,3 +1,4 @@
+
 // 计算器Dlg.h : 头文件
 //
 
@@ -5,7 +6,7 @@
 
 
 // C计算器Dlg 对话框
-class C计算器Dlg : public CDialog
+class C计算器Dlg : public CDialogEx
 {
 // 构造
 public:
@@ -29,41 +30,21 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnBnClickedOk();
-public:
-	afx_msg void OnBnClickedOk2();
-public:
-	afx_msg void OnBnClickedCancel();
-public:
 	CString m_text;
-public:
-	afx_msg void OnBnClickedButton1();
-public:
-	afx_msg void OnBnClickedButton2();
-public:
-	afx_msg void OnBnClickedButton3();
-public:
-	afx_msg void OnBnClickedButton4();
-public:
-	afx_msg void OnBnClickedButton5();
-public:
-	afx_msg void OnBnClickedButton6();
-public:
-	afx_msg void OnBnClickedButton7();
-public:
-	afx_msg void OnBnClickedButton8();
-public:
-	afx_msg void OnBnClickedButton9();
-public:
-	afx_msg void OnBnClickedButton13();
-public:
-	afx_msg void OnBnClickedButton11();
-public:
-	afx_msg void OnBnClickedButton12();
-public:
-	afx_msg void OnBnClickedButton10();
-public:
-	afx_msg void OnEnChangeEdit1();
-public:
 	afx_msg void OnBnClickedButton14();
+	afx_msg void OnBnClickedButton13();
+	afx_msg void OnBnClickedButton5();
+	afx_msg void OnBnClickedButton15();
+	afx_msg void OnBnClickedButton1();
+	afx_msg void OnBnClickedButton6();
+	afx_msg void OnBnClickedButton2();
+	afx_msg void OnBnClickedButton16();
+	afx_msg void OnBnClickedButton3();
+	afx_msg void OnBnClickedButton7();
+	afx_msg void OnBnClickedButton4();
+	afx_msg void OnBnClickedButton8();
+	afx_msg void OnBnClickedButton11();
+	afx_msg void OnBnClickedButton10();
+	afx_msg void OnBnClickedButton9();
+	afx_msg void OnBnClickedButton17();
 };

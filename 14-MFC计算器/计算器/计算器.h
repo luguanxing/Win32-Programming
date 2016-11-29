@@ -1,3 +1,4 @@
+
 // 计算器.h : PROJECT_NAME 应用程序的主头文件
 //
 
@@ -20,7 +21,7 @@ public:
 	C计算器App();
 
 // 重写
-	public:
+public:
 	virtual BOOL InitInstance();
 
 // 实现
