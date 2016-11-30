@@ -1,10 +1,10 @@
 
-// ¼ÆËãÆ÷Dlg.cpp : ÊµÏÖÎÄ¼ş
+// è®¡ç®—å™¨Dlg.cpp : å®ç°æ–‡ä»¶
 //
 
 #include "stdafx.h"
-#include "¼ÆËãÆ÷.h"
-#include "¼ÆËãÆ÷Dlg.h"
+#include "è®¡ç®—å™¨.h"
+#include "è®¡ç®—å™¨Dlg.h"
 #include "afxdialogex.h"
 
 #ifdef _DEBUG
@@ -12,20 +12,20 @@
 #endif
 
 
-// ÓÃÓÚÓ¦ÓÃ³ÌĞò¡°¹ØÓÚ¡±²Ëµ¥ÏîµÄ CAboutDlg ¶Ô»°¿ò
+// ç”¨äºåº”ç”¨ç¨‹åºâ€œå…³äºâ€èœå•é¡¹çš„ CAboutDlg å¯¹è¯æ¡†
 
 class CAboutDlg : public CDialogEx
 {
 public:
 	CAboutDlg();
 
-// ¶Ô»°¿òÊı¾İ
+// å¯¹è¯æ¡†æ•°æ®
 	enum { IDD = IDD_ABOUTBOX };
 
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
 
-// ÊµÏÖ
+// å®ç°
 protected:
 	DECLARE_MESSAGE_MAP()
 };
@@ -43,56 +43,56 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// C¼ÆËãÆ÷Dlg ¶Ô»°¿ò
+// Cè®¡ç®—å™¨Dlg å¯¹è¯æ¡†
 
 
 
 
-C¼ÆËãÆ÷Dlg::C¼ÆËãÆ÷Dlg(CWnd* pParent /*=NULL*/)
-	: CDialogEx(C¼ÆËãÆ÷Dlg::IDD, pParent)
+Cè®¡ç®—å™¨Dlg::Cè®¡ç®—å™¨Dlg(CWnd* pParent /*=NULL*/)
+	: CDialogEx(Cè®¡ç®—å™¨Dlg::IDD, pParent)
 	, m_text(_T(""))
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDI_ICON1);
 }
 
-void C¼ÆËãÆ÷Dlg::DoDataExchange(CDataExchange* pDX)
+void Cè®¡ç®—å™¨Dlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_EDIT1, m_text);
 }
 
-BEGIN_MESSAGE_MAP(C¼ÆËãÆ÷Dlg, CDialogEx)
+BEGIN_MESSAGE_MAP(Cè®¡ç®—å™¨Dlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(IDC_BUTTON14, &C¼ÆËãÆ÷Dlg::OnBnClickedButton14)
-	ON_BN_CLICKED(IDC_BUTTON13, &C¼ÆËãÆ÷Dlg::OnBnClickedButton13)
-	ON_BN_CLICKED(IDC_BUTTON5, &C¼ÆËãÆ÷Dlg::OnBnClickedButton5)
-	ON_BN_CLICKED(IDC_BUTTON15, &C¼ÆËãÆ÷Dlg::OnBnClickedButton15)
-	ON_BN_CLICKED(IDC_BUTTON1, &C¼ÆËãÆ÷Dlg::OnBnClickedButton1)
-	ON_BN_CLICKED(IDC_BUTTON6, &C¼ÆËãÆ÷Dlg::OnBnClickedButton6)
-	ON_BN_CLICKED(IDC_BUTTON2, &C¼ÆËãÆ÷Dlg::OnBnClickedButton2)
-	ON_BN_CLICKED(IDC_BUTTON16, &C¼ÆËãÆ÷Dlg::OnBnClickedButton16)
-	ON_BN_CLICKED(IDC_BUTTON3, &C¼ÆËãÆ÷Dlg::OnBnClickedButton3)
-	ON_BN_CLICKED(IDC_BUTTON7, &C¼ÆËãÆ÷Dlg::OnBnClickedButton7)
-	ON_BN_CLICKED(IDC_BUTTON4, &C¼ÆËãÆ÷Dlg::OnBnClickedButton4)
-	ON_BN_CLICKED(IDC_BUTTON8, &C¼ÆËãÆ÷Dlg::OnBnClickedButton8)
-	ON_BN_CLICKED(IDC_BUTTON11, &C¼ÆËãÆ÷Dlg::OnBnClickedButton11)
-	ON_BN_CLICKED(IDC_BUTTON10, &C¼ÆËãÆ÷Dlg::OnBnClickedButton10)
-	ON_BN_CLICKED(IDC_BUTTON9, &C¼ÆËãÆ÷Dlg::OnBnClickedButton9)
-	ON_BN_CLICKED(IDC_BUTTON17, &C¼ÆËãÆ÷Dlg::OnBnClickedButton17)
+	ON_BN_CLICKED(IDC_BUTTON14, &Cè®¡ç®—å™¨Dlg::OnBnClickedButton14)
+	ON_BN_CLICKED(IDC_BUTTON13, &Cè®¡ç®—å™¨Dlg::OnBnClickedButton13)
+	ON_BN_CLICKED(IDC_BUTTON5, &Cè®¡ç®—å™¨Dlg::OnBnClickedButton5)
+	ON_BN_CLICKED(IDC_BUTTON15, &Cè®¡ç®—å™¨Dlg::OnBnClickedButton15)
+	ON_BN_CLICKED(IDC_BUTTON1, &Cè®¡ç®—å™¨Dlg::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_BUTTON6, &Cè®¡ç®—å™¨Dlg::OnBnClickedButton6)
+	ON_BN_CLICKED(IDC_BUTTON2, &Cè®¡ç®—å™¨Dlg::OnBnClickedButton2)
+	ON_BN_CLICKED(IDC_BUTTON16, &Cè®¡ç®—å™¨Dlg::OnBnClickedButton16)
+	ON_BN_CLICKED(IDC_BUTTON3, &Cè®¡ç®—å™¨Dlg::OnBnClickedButton3)
+	ON_BN_CLICKED(IDC_BUTTON7, &Cè®¡ç®—å™¨Dlg::OnBnClickedButton7)
+	ON_BN_CLICKED(IDC_BUTTON4, &Cè®¡ç®—å™¨Dlg::OnBnClickedButton4)
+	ON_BN_CLICKED(IDC_BUTTON8, &Cè®¡ç®—å™¨Dlg::OnBnClickedButton8)
+	ON_BN_CLICKED(IDC_BUTTON11, &Cè®¡ç®—å™¨Dlg::OnBnClickedButton11)
+	ON_BN_CLICKED(IDC_BUTTON10, &Cè®¡ç®—å™¨Dlg::OnBnClickedButton10)
+	ON_BN_CLICKED(IDC_BUTTON9, &Cè®¡ç®—å™¨Dlg::OnBnClickedButton9)
+	ON_BN_CLICKED(IDC_BUTTON17, &Cè®¡ç®—å™¨Dlg::OnBnClickedButton17)
 END_MESSAGE_MAP()
 
 
-// C¼ÆËãÆ÷Dlg ÏûÏ¢´¦Àí³ÌĞò
+// Cè®¡ç®—å™¨Dlg æ¶ˆæ¯å¤„ç†ç¨‹åº
 
-BOOL C¼ÆËãÆ÷Dlg::OnInitDialog()
+BOOL Cè®¡ç®—å™¨Dlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	// ½«¡°¹ØÓÚ...¡±²Ëµ¥ÏîÌí¼Óµ½ÏµÍ³²Ëµ¥ÖĞ¡£
+	// å°†â€œå…³äº...â€èœå•é¡¹æ·»åŠ åˆ°ç³»ç»Ÿèœå•ä¸­ã€‚
 
-	// IDM_ABOUTBOX ±ØĞëÔÚÏµÍ³ÃüÁî·¶Î§ÄÚ¡£
+	// IDM_ABOUTBOX å¿…é¡»åœ¨ç³»ç»Ÿå‘½ä»¤èŒƒå›´å†…ã€‚
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
 
@@ -110,17 +110,17 @@ BOOL C¼ÆËãÆ÷Dlg::OnInitDialog()
 		}
 	}
 
-	// ÉèÖÃ´Ë¶Ô»°¿òµÄÍ¼±ê¡£µ±Ó¦ÓÃ³ÌĞòÖ÷´°¿Ú²»ÊÇ¶Ô»°¿òÊ±£¬¿ò¼Ü½«×Ô¶¯
-	//  Ö´ĞĞ´Ë²Ù×÷
-	SetIcon(m_hIcon, TRUE);			// ÉèÖÃ´óÍ¼±ê
-	SetIcon(m_hIcon, FALSE);		// ÉèÖÃĞ¡Í¼±ê
+	// è®¾ç½®æ­¤å¯¹è¯æ¡†çš„å›¾æ ‡ã€‚å½“åº”ç”¨ç¨‹åºä¸»çª—å£ä¸æ˜¯å¯¹è¯æ¡†æ—¶ï¼Œæ¡†æ¶å°†è‡ªåŠ¨
+	//  æ‰§è¡Œæ­¤æ“ä½œ
+	SetIcon(m_hIcon, TRUE);			// è®¾ç½®å¤§å›¾æ ‡
+	SetIcon(m_hIcon, FALSE);		// è®¾ç½®å°å›¾æ ‡
 
-	// TODO: ÔÚ´ËÌí¼Ó¶îÍâµÄ³õÊ¼»¯´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ é¢å¤–çš„åˆå§‹åŒ–ä»£ç 
 
-	return TRUE;  // ³ı·Ç½«½¹µãÉèÖÃµ½¿Ø¼ş£¬·ñÔò·µ»Ø TRUE
+	return TRUE;  // é™¤éå°†ç„¦ç‚¹è®¾ç½®åˆ°æ§ä»¶ï¼Œå¦åˆ™è¿”å› TRUE
 }
 
-void C¼ÆËãÆ÷Dlg::OnSysCommand(UINT nID, LPARAM lParam)
+void Cè®¡ç®—å™¨Dlg::OnSysCommand(UINT nID, LPARAM lParam)
 {
 	if ((nID & 0xFFF0) == IDM_ABOUTBOX)
 	{
@@ -133,19 +133,19 @@ void C¼ÆËãÆ÷Dlg::OnSysCommand(UINT nID, LPARAM lParam)
 	}
 }
 
-// Èç¹ûÏò¶Ô»°¿òÌí¼Ó×îĞ¡»¯°´Å¥£¬ÔòĞèÒªÏÂÃæµÄ´úÂë
-//  À´»æÖÆ¸ÃÍ¼±ê¡£¶ÔÓÚÊ¹ÓÃÎÄµµ/ÊÓÍ¼Ä£ĞÍµÄ MFC Ó¦ÓÃ³ÌĞò£¬
-//  Õâ½«ÓÉ¿ò¼Ü×Ô¶¯Íê³É¡£
+// å¦‚æœå‘å¯¹è¯æ¡†æ·»åŠ æœ€å°åŒ–æŒ‰é’®ï¼Œåˆ™éœ€è¦ä¸‹é¢çš„ä»£ç 
+//  æ¥ç»˜åˆ¶è¯¥å›¾æ ‡ã€‚å¯¹äºä½¿ç”¨æ–‡æ¡£/è§†å›¾æ¨¡å‹çš„ MFC åº”ç”¨ç¨‹åºï¼Œ
+//  è¿™å°†ç”±æ¡†æ¶è‡ªåŠ¨å®Œæˆã€‚
 
-void C¼ÆËãÆ÷Dlg::OnPaint()
+void Cè®¡ç®—å™¨Dlg::OnPaint()
 {
 	if (IsIconic())
 	{
-		CPaintDC dc(this); // ÓÃÓÚ»æÖÆµÄÉè±¸ÉÏÏÂÎÄ
+		CPaintDC dc(this); // ç”¨äºç»˜åˆ¶çš„è®¾å¤‡ä¸Šä¸‹æ–‡
 
 		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
 
-		// Ê¹Í¼±êÔÚ¹¤×÷Çø¾ØĞÎÖĞ¾ÓÖĞ
+		// ä½¿å›¾æ ‡åœ¨å·¥ä½œåŒºçŸ©å½¢ä¸­å±…ä¸­
 		int cxIcon = GetSystemMetrics(SM_CXICON);
 		int cyIcon = GetSystemMetrics(SM_CYICON);
 		CRect rect;
@@ -153,7 +153,7 @@ void C¼ÆËãÆ÷Dlg::OnPaint()
 		int x = (rect.Width() - cxIcon + 1) / 2;
 		int y = (rect.Height() - cyIcon + 1) / 2;
 
-		// »æÖÆÍ¼±ê
+		// ç»˜åˆ¶å›¾æ ‡
 		dc.DrawIcon(x, y, m_hIcon);
 	}
 	else
@@ -162,129 +162,129 @@ void C¼ÆËãÆ÷Dlg::OnPaint()
 	}
 }
 
-//µ±ÓÃ»§ÍÏ¶¯×îĞ¡»¯´°¿ÚÊ±ÏµÍ³µ÷ÓÃ´Ëº¯ÊıÈ¡µÃ¹â±ê
-//ÏÔÊ¾¡£
-HCURSOR C¼ÆËãÆ÷Dlg::OnQueryDragIcon()
+//å½“ç”¨æˆ·æ‹–åŠ¨æœ€å°åŒ–çª—å£æ—¶ç³»ç»Ÿè°ƒç”¨æ­¤å‡½æ•°å–å¾—å…‰æ ‡
+//æ˜¾ç¤ºã€‚
+HCURSOR Cè®¡ç®—å™¨Dlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
 
 
-void C¼ÆËãÆ÷Dlg::OnBnClickedButton14()
+void Cè®¡ç®—å™¨Dlg::OnBnClickedButton14()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	m_text += _T("1");
 	UpdateData(false);
 }
 
 
-void C¼ÆËãÆ÷Dlg::OnBnClickedButton13()
+void Cè®¡ç®—å™¨Dlg::OnBnClickedButton13()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	m_text += _T("2");
 	UpdateData(false);
 }
 
 
-void C¼ÆËãÆ÷Dlg::OnBnClickedButton5()
+void Cè®¡ç®—å™¨Dlg::OnBnClickedButton5()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	m_text += _T("3");
 	UpdateData(false);
 }
 
 
-void C¼ÆËãÆ÷Dlg::OnBnClickedButton15()
+void Cè®¡ç®—å™¨Dlg::OnBnClickedButton15()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	m_text += _T("4");
 	UpdateData(false);
 }
 
 
-void C¼ÆËãÆ÷Dlg::OnBnClickedButton1()
+void Cè®¡ç®—å™¨Dlg::OnBnClickedButton1()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	m_text += _T("5");
 	UpdateData(false);
 }
 
 
-void C¼ÆËãÆ÷Dlg::OnBnClickedButton6()
+void Cè®¡ç®—å™¨Dlg::OnBnClickedButton6()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	m_text += _T("6");
 	UpdateData(false);
 }
 
 
-void C¼ÆËãÆ÷Dlg::OnBnClickedButton2()
+void Cè®¡ç®—å™¨Dlg::OnBnClickedButton2()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	m_text += _T("+");
 	UpdateData(false);
 }
 
 
-void C¼ÆËãÆ÷Dlg::OnBnClickedButton16()
+void Cè®¡ç®—å™¨Dlg::OnBnClickedButton16()
 {
 	m_text += _T("7");
 	UpdateData(false);
 }
 
 
-void C¼ÆËãÆ÷Dlg::OnBnClickedButton3()
+void Cè®¡ç®—å™¨Dlg::OnBnClickedButton3()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	m_text += _T("8");
 	UpdateData(false);
 }
 
 
-void C¼ÆËãÆ÷Dlg::OnBnClickedButton7()
+void Cè®¡ç®—å™¨Dlg::OnBnClickedButton7()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	m_text += _T("9");
 	UpdateData(false);
 }
 
 
-void C¼ÆËãÆ÷Dlg::OnBnClickedButton4()
+void Cè®¡ç®—å™¨Dlg::OnBnClickedButton4()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	m_text += _T("-");
 	UpdateData(false);
 }
 
 
-void C¼ÆËãÆ÷Dlg::OnBnClickedButton8()
+void Cè®¡ç®—å™¨Dlg::OnBnClickedButton8()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	m_text += _T("*");
 	UpdateData(false);
 }
 
 
-void C¼ÆËãÆ÷Dlg::OnBnClickedButton11()
+void Cè®¡ç®—å™¨Dlg::OnBnClickedButton11()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	m_text += _T("/");
 	UpdateData(false);
 }
 
 
-void C¼ÆËãÆ÷Dlg::OnBnClickedButton10()
+void Cè®¡ç®—å™¨Dlg::OnBnClickedButton10()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	m_text += _T("0");
 	UpdateData(false);
 }
 
 
-void C¼ÆËãÆ÷Dlg::OnBnClickedButton9()
+void Cè®¡ç®—å™¨Dlg::OnBnClickedButton9()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	m_text = _T("0");
 	UpdateData(false);
 }
@@ -321,9 +321,18 @@ bool Calculator::can_do(char c)
 
 void Calculator::exe_cacu()
 {
+	if (!number.size()) {
+			::MessageBoxA(NULL, "æ•°å­—é”™è¯¯", "é”™è¯¯", MB_ICONERROR);
+			exit(0);
+	}
 	int b = number.top();
 	number.pop();
-	int a = number.top();number.pop();
+	if (!number.size()) {
+			::MessageBoxA(NULL, "æ•°å­—é”™è¯¯", "é”™è¯¯", MB_ICONERROR);
+			exit(0);
+	}
+	int a = number.top();
+	number.pop();
 	int result;
 	switch(op.top())
 	{
@@ -338,7 +347,7 @@ void Calculator::exe_cacu()
 		break;
 	case '/': {
 		if (b == 0) {
-			::MessageBoxA(NULL, "Êı×Ö´íÎó", "´íÎó", MB_ICONERROR);
+			::MessageBoxA(NULL, "æ•°å­—é”™è¯¯", "é”™è¯¯", MB_ICONERROR);
 			exit(0);
 		}
 		result = a/b;
@@ -399,16 +408,17 @@ int Calculator::getResult(std::string s)
      return wstr; 
  }
 
-void C¼ÆËãÆ÷Dlg::OnBnClickedButton17()
+void Cè®¡ç®—å™¨Dlg::OnBnClickedButton17()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	std::wstring ws = m_text;
 	m_text.ReleaseBuffer();
 	std::string s;
 	s = WStringToString(ws);
 	char buff[100];
 	Calculator calc;
-	std::sprintf(buff, "%d", calc.getResult(s));
+	int result = calc.getResult(s);
+	std::sprintf(buff, "%d", result);
 	m_text = buff;
 	UpdateData(false);
 }
