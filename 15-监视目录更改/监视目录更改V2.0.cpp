@@ -23,14 +23,14 @@ DWORD WINAPI ThreadProc(LPVOID lParam) {
 			&Buffer,
 			sizeof(Buffer),
 			TRUE,
-			FILE_NOTIFY_CHANGE_FILE_NAME |			// –ﬁ∏ƒŒƒº˛√˚
-			FILE_NOTIFY_CHANGE_ATTRIBUTES |			// –ﬁ∏ƒŒƒº˛ Ù–‘
-			FILE_NOTIFY_CHANGE_LAST_WRITE,			// ◊Ó∫Û“ª¥Œ–¥»Î
+			FILE_NOTIFY_CHANGE_FILE_NAME |			// ‰øÆÊîπÊñá‰ª∂Âêç
+			FILE_NOTIFY_CHANGE_ATTRIBUTES |			// ‰øÆÊîπÊñá‰ª∂Â±ûÊÄß
+			FILE_NOTIFY_CHANGE_LAST_WRITE,			// ÊúÄÂêé‰∏ÄÊ¨°ÂÜôÂÖ•
 			&dwByteReturn, NULL, NULL);				
 		if(TRUE == bRet) {
 			char szFileName[MAX_PATH] = {0};
 
-			// øÓ◊÷∑˚◊™ªªŒ™∂‡◊÷Ω⁄
+			// Ê¨æÂ≠óÁ¨¶ËΩ¨Êç¢‰∏∫Â§öÂ≠óËäÇ
 			::WideCharToMultiByte(CP_ACP,
 				0,
 				pBuffer->FileName,
@@ -42,22 +42,22 @@ DWORD WINAPI ThreadProc(LPVOID lParam) {
 			switch(pBuffer->Action) {
 				case FILE_ACTION_ADDED:
 					{
-						printf("ÃÌº”: %s\r\n", szFileName);
+						printf("Ê∑ªÂä†: %s\r\n", szFileName);
 						break;
 					}
 				case FILE_ACTION_REMOVED:
 					{
-						printf("…æ≥˝:%s\r\n", szFileName);
+						printf("Âà†Èô§:%s\r\n", szFileName);
 						break;
 					}
 				case FILE_ACTION_MODIFIED:
 					{
-						printf("–ﬁ∏ƒ:%s\r\n", szFileName);
+						printf("‰øÆÊîπ:%s\r\n", szFileName);
 						break;
 					}
 				case FILE_ACTION_RENAMED_OLD_NAME:
 					{
-						printf("÷ÿ√¸√˚:%s", szFileName);
+						printf("ÈáçÂëΩÂêç:%s", szFileName);
 						if(0 != pBuffer->NextEntryOffset) {
 							FILE_NOTIFY_INFORMATION *tmpBuffer = (FILE_NOTIFY_INFORMATION *)
 								((DWORD)pBuffer + pBuffer->NextEntryOffset);
@@ -83,12 +83,11 @@ DWORD WINAPI ThreadProc(LPVOID lParam) {
 					}
 				case FILE_ACTION_RENAMED_NEW_NAME:
 					{
-						printf("÷ÿ√¸√˚(new):%s\r\n", szFileName);
+						printf("ÈáçÂëΩÂêç(new):%s\r\n", szFileName);
 						break;
 					}
 				}
 		}
-		::Sleep(5);
 	}
 	::CloseHandle(hFile);
 
