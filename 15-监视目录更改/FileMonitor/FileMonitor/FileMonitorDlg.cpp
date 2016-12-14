@@ -1,5 +1,5 @@
 
-// FileMonitorDlg.cpp : ÊµÏÖÎÄ¼ş
+// FileMonitorDlg.cpp : å®ç°æ–‡ä»¶
 //
 
 #include "stdafx.h"
@@ -21,13 +21,13 @@ bool start = false;
 WCHAR timebuff[MAX_PATH+50];
 
 void gettime(bool style = true) {
-	CTime time = CTime::GetCurrentTime();///¹¹ÔìCTime¶ÔÏó
-	int m_nYear = time.GetYear();///Äê
-	int m_nMonth = time.GetMonth();///ÔÂ
-	int m_nDay = time.GetDay();///ÈÕ
-	int m_nHour = time.GetHour();///Ğ¡Ê±
-	int m_nMinute = time.GetMinute();///·ÖÖÓ
-	int m_nSecond = time.GetSecond();///Ãë
+	CTime time = CTime::GetCurrentTime();///æ„é€ CTimeå¯¹è±¡
+	int m_nYear = time.GetYear();///å¹´
+	int m_nMonth = time.GetMonth();///æœˆ
+	int m_nDay = time.GetDay();///æ—¥
+	int m_nHour = time.GetHour();///å°æ—¶
+	int m_nMinute = time.GetMinute();///åˆ†é’Ÿ
+	int m_nSecond = time.GetSecond();///ç§’
 	CString m_strTime = time.Format(_T("%Y-%m-%d %H:%M:%S"));
 	if (!style)
 		m_strTime = time.Format(_T("%Y-%m-%d %H;%M;%S"));
@@ -36,20 +36,20 @@ void gettime(bool style = true) {
 	m_strTime.ReleaseBuffer();
 }
 
-// ÓÃÓÚÓ¦ÓÃ³ÌĞò¡°¹ØÓÚ¡±²Ëµ¥ÏîµÄ CAboutDlg ¶Ô»°¿ò
+// ç”¨äºåº”ç”¨ç¨‹åºâ€œå…³äºâ€èœå•é¡¹çš„ CAboutDlg å¯¹è¯æ¡†
 
 class CAboutDlg : public CDialogEx
 {
 public:
 	CAboutDlg();
 
-// ¶Ô»°¿òÊı¾İ
+// å¯¹è¯æ¡†æ•°æ®
 	enum { IDD = IDD_ABOUTBOX };
 
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
 
-// ÊµÏÖ
+// å®ç°
 protected:
 	DECLARE_MESSAGE_MAP()
 };
@@ -67,7 +67,7 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// CFileMonitorDlg ¶Ô»°¿ò
+// CFileMonitorDlg å¯¹è¯æ¡†
 
 
 
@@ -108,7 +108,7 @@ DWORD WINAPI monitor(LPVOID) {
 		FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, 
 		NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
 	if(INVALID_HANDLE_VALUE == hFile) {
-		::MessageBox(NULL, _T("´ò¿ªÎÄ¼şÄ¿Â¼´íÎó"), _T("´íÎó"), MB_ICONERROR);
+		::MessageBox(NULL, _T("æ‰“å¼€æ–‡ä»¶ç›®å½•é”™è¯¯"), _T("é”™è¯¯"), MB_ICONERROR);
 		return 1;
 	}
 	while(TRUE) {
@@ -117,14 +117,14 @@ DWORD WINAPI monitor(LPVOID) {
 			&Buffer,
 			sizeof(Buffer),
 			TRUE,
-			FILE_NOTIFY_CHANGE_FILE_NAME |			// ĞŞ¸ÄÎÄ¼şÃû
-			FILE_NOTIFY_CHANGE_ATTRIBUTES |			// ĞŞ¸ÄÎÄ¼şÊôĞÔ
-			FILE_NOTIFY_CHANGE_LAST_WRITE,			// ×îºóÒ»´ÎĞ´Èë
+			FILE_NOTIFY_CHANGE_FILE_NAME |			// ä¿®æ”¹æ–‡ä»¶å
+			FILE_NOTIFY_CHANGE_ATTRIBUTES |			// ä¿®æ”¹æ–‡ä»¶å±æ€§
+			FILE_NOTIFY_CHANGE_LAST_WRITE,			// æœ€åä¸€æ¬¡å†™å…¥
 			&dwByteReturn, NULL, NULL);				
 		if(TRUE == bRet) {
 			char szFileName[MAX_PATH+50] = {0};
 
-			// ¿î×Ö·û×ª»»Îª¶à×Ö½Ú
+			// æ¬¾å­—ç¬¦è½¬æ¢ä¸ºå¤šå­—èŠ‚
 			::WideCharToMultiByte(CP_ACP,
 				0,
 				pBuffer->FileName,
@@ -141,7 +141,7 @@ DWORD WINAPI monitor(LPVOID) {
 						gettime();
 						std::wcscpy(buff, timebuff);
 						std::wcscat(buff, _T("     \t"));
-						std::wcscat(buff, _T("Ìí¼Ó: "));
+						std::wcscat(buff, _T("æ·»åŠ : "));
 						std::wcscat(buff, pBuffer->FileName);
 						setlistbox(wcslen(buff));
 						mylistbox->AddString(buff);
@@ -153,7 +153,7 @@ DWORD WINAPI monitor(LPVOID) {
 						gettime();
 						std::wcscpy(buff, timebuff);
 						std::wcscat(buff, _T("     \t"));
-						std::wcscat(buff, _T("É¾³ı: "));
+						std::wcscat(buff, _T("åˆ é™¤: "));
 						std::wcscat(buff, pBuffer->FileName);
 						setlistbox(wcslen(buff));
 						mylistbox->AddString(buff);
@@ -170,7 +170,7 @@ DWORD WINAPI monitor(LPVOID) {
 						gettime();
 						std::wcscpy(buff, timebuff);
 						std::wcscat(buff, _T("     \t"));
-						std::wcscat(buff, _T("ĞŞ¸Ä: "));
+						std::wcscat(buff, _T("ä¿®æ”¹: "));
 						std::wcscat(buff, pBuffer->FileName);
 						setlistbox(wcslen(buff));
 						mylistbox->AddString(buff);
@@ -178,12 +178,12 @@ DWORD WINAPI monitor(LPVOID) {
 					}
 				case FILE_ACTION_RENAMED_OLD_NAME:
 					{
-						once = false;	//·ÀÖ¹ÖØ¸´¼ÇÂ¼
+						once = false;	//é˜²æ­¢é‡å¤è®°å½•
 						WCHAR buff[MAX_PATH+50]; 
 						gettime();
 						std::wcscpy(buff, timebuff);
 						std::wcscat(buff, _T("     \t"));
-						std::wcscat(buff, _T("ÖØÃüÃû: "));
+						std::wcscat(buff, _T("é‡å‘½å: "));
 						std::wcscat(buff, pBuffer->FileName);
 						if(0 != pBuffer->NextEntryOffset) {
 							FILE_NOTIFY_INFORMATION *tmpBuffer = (FILE_NOTIFY_INFORMATION *)
@@ -217,7 +217,7 @@ DWORD WINAPI monitor(LPVOID) {
 						gettime();
 						std::wcscpy(buff, timebuff);
 						std::wcscat(buff, _T("     \t"));
-						std::wcscat(buff, _T("ÖØÃüÃû: "));
+						std::wcscat(buff, _T("é‡å‘½å: "));
 						std::wcscat(buff, pBuffer->FileName);
 						setlistbox(wcslen(buff));
 						mylistbox->AddString(buff);
@@ -231,14 +231,14 @@ DWORD WINAPI monitor(LPVOID) {
 	return 0;
 }
 
-// CFileMonitorDlg ÏûÏ¢´¦Àí³ÌĞò
+// CFileMonitorDlg æ¶ˆæ¯å¤„ç†ç¨‹åº
 BOOL CFileMonitorDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	// ½«¡°¹ØÓÚ...¡±²Ëµ¥ÏîÌí¼Óµ½ÏµÍ³²Ëµ¥ÖĞ¡£
+	// å°†â€œå…³äº...â€èœå•é¡¹æ·»åŠ åˆ°ç³»ç»Ÿèœå•ä¸­ã€‚
 
-	// IDM_ABOUTBOX ±ØĞëÔÚÏµÍ³ÃüÁî·¶Î§ÄÚ¡£
+	// IDM_ABOUTBOX å¿…é¡»åœ¨ç³»ç»Ÿå‘½ä»¤èŒƒå›´å†…ã€‚
 ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
 
@@ -256,15 +256,15 @@ ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 		}
 	}
 
-	// ÉèÖÃ´Ë¶Ô»°¿òµÄÍ¼±ê¡£µ±Ó¦ÓÃ³ÌĞòÖ÷´°¿Ú²»ÊÇ¶Ô»°¿òÊ±£¬¿ò¼Ü½«×Ô¶¯
-	//  Ö´ĞĞ´Ë²Ù×÷
-	SetIcon(m_hIcon, TRUE);			// ÉèÖÃ´óÍ¼±ê
-	SetIcon(m_hIcon, FALSE);		// ÉèÖÃĞ¡Í¼±ê
+	// è®¾ç½®æ­¤å¯¹è¯æ¡†çš„å›¾æ ‡ã€‚å½“åº”ç”¨ç¨‹åºä¸»çª—å£ä¸æ˜¯å¯¹è¯æ¡†æ—¶ï¼Œæ¡†æ¶å°†è‡ªåŠ¨
+	//  æ‰§è¡Œæ­¤æ“ä½œ
+	SetIcon(m_hIcon, TRUE);			// è®¾ç½®å¤§å›¾æ ‡
+	SetIcon(m_hIcon, FALSE);		// è®¾ç½®å°å›¾æ ‡
 
-	// TODO: ÔÚ´ËÌí¼Ó¶îÍâµÄ³õÊ¼»¯´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ é¢å¤–çš„åˆå§‹åŒ–ä»£ç 
 	mylistbox = &listbox;
 
-	return TRUE;  // ³ı·Ç½«½¹µãÉèÖÃµ½¿Ø¼ş£¬·ñÔò·µ»Ø TRUE
+	return TRUE;  // é™¤éå°†ç„¦ç‚¹è®¾ç½®åˆ°æ§ä»¶ï¼Œå¦åˆ™è¿”å› TRUE
 }
 
 void CFileMonitorDlg::OnSysCommand(UINT nID, LPARAM lParam)
@@ -280,19 +280,19 @@ void CFileMonitorDlg::OnSysCommand(UINT nID, LPARAM lParam)
 	}
 }
 
-// Èç¹ûÏò¶Ô»°¿òÌí¼Ó×îĞ¡»¯°´Å¥£¬ÔòĞèÒªÏÂÃæµÄ´úÂë
-//  À´»æÖÆ¸ÃÍ¼±ê¡£¶ÔÓÚÊ¹ÓÃÎÄµµ/ÊÓÍ¼Ä£ĞÍµÄ MFC Ó¦ÓÃ³ÌĞò£¬
-//  Õâ½«ÓÉ¿ò¼Ü×Ô¶¯Íê³É¡£
+// å¦‚æœå‘å¯¹è¯æ¡†æ·»åŠ æœ€å°åŒ–æŒ‰é’®ï¼Œåˆ™éœ€è¦ä¸‹é¢çš„ä»£ç 
+//  æ¥ç»˜åˆ¶è¯¥å›¾æ ‡ã€‚å¯¹äºä½¿ç”¨æ–‡æ¡£/è§†å›¾æ¨¡å‹çš„ MFC åº”ç”¨ç¨‹åºï¼Œ
+//  è¿™å°†ç”±æ¡†æ¶è‡ªåŠ¨å®Œæˆã€‚
 
 void CFileMonitorDlg::OnPaint()
 {
 	if (IsIconic())
 	{
-		CPaintDC dc(this); // ÓÃÓÚ»æÖÆµÄÉè±¸ÉÏÏÂÎÄ
+		CPaintDC dc(this); // ç”¨äºç»˜åˆ¶çš„è®¾å¤‡ä¸Šä¸‹æ–‡
 
 		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
 
-		// Ê¹Í¼±êÔÚ¹¤×÷Çø¾ØĞÎÖĞ¾ÓÖĞ
+		// ä½¿å›¾æ ‡åœ¨å·¥ä½œåŒºçŸ©å½¢ä¸­å±…ä¸­
 		int cxIcon = GetSystemMetrics(SM_CXICON);
 		int cyIcon = GetSystemMetrics(SM_CYICON);
 		CRect rect;
@@ -300,7 +300,7 @@ void CFileMonitorDlg::OnPaint()
 		int x = (rect.Width() - cxIcon + 1) / 2;
 		int y = (rect.Height() - cyIcon + 1) / 2;
 
-		// »æÖÆÍ¼±ê
+		// ç»˜åˆ¶å›¾æ ‡
 		dc.DrawIcon(x, y, m_hIcon);
 	}
 	else
@@ -309,8 +309,8 @@ void CFileMonitorDlg::OnPaint()
 	}
 }
 
-//µ±ÓÃ»§ÍÏ¶¯×îĞ¡»¯´°¿ÚÊ±ÏµÍ³µ÷ÓÃ´Ëº¯ÊıÈ¡µÃ¹â±ê
-//ÏÔÊ¾¡£
+//å½“ç”¨æˆ·æ‹–åŠ¨æœ€å°åŒ–çª—å£æ—¶ç³»ç»Ÿè°ƒç”¨æ­¤å‡½æ•°å–å¾—å…‰æ ‡
+//æ˜¾ç¤ºã€‚
 HCURSOR CFileMonitorDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
@@ -328,12 +328,7 @@ void setlistbox(int oldsize) {
 
 void CFileMonitorDlg::OnBnClickedButtonChoosefile()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
-	bool pause = false;
-	if (hmonitor != NULL) {
-		OnBnClickedButtonStart();
-		pause = true;
-	}
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 
 	BROWSEINFO bi; 
 
@@ -342,7 +337,7 @@ void CFileMonitorDlg::OnBnClickedButtonChoosefile()
 	ZeroMemory(&bi, sizeof(bi));      
 	bi.hwndOwner = GetSafeHwnd(); 
 	bi.pszDisplayName = dirname; 
-	bi.lpszTitle = _T("\nÇëÑ¡Ôñ¼àÊÓÄ¿Â¼:"); 
+	bi.lpszTitle = _T("\nè¯·é€‰æ‹©ç›‘è§†ç›®å½•:"); 
 	bi.ulFlags = BIF_RETURNONLYFSDIRS;  
 	pidl = SHBrowseForFolder(&bi); 
 	CString sPath;
@@ -352,35 +347,33 @@ void CFileMonitorDlg::OnBnClickedButtonChoosefile()
 		sPath = dirname; 
 	} else {
 		if (dirname[0] == '\0')
-			::MessageBox(NULL, _T("Î´Ñ¡ÔñÄ¿Â¼"), _T("´íÎó"), MB_ICONERROR);
-		//memset(dirname, 0, MAX_PATH+50);
+			::MessageBox(NULL, _T("æœªé€‰æ‹©ç›®å½•"), _T("é”™è¯¯"), MB_ICONERROR);
 	}
 	if (dirname[0] != '\0') {
 		WCHAR buff[MAX_PATH+50]; 
-		std::wcscpy(buff, _T("ÒÑÑ¡ÔñÄ¿Â¼: "));
+		std::wcscpy(buff, _T("å·²é€‰æ‹©ç›®å½•: "));
 		std::wcscat(buff, dirname);
 		setlistbox(wcslen(buff));
 		listbox.AddString(buff);
-	}
 
-	if (pause) {
+		OnBnClickedButtonStart();
 		OnBnClickedButtonStart();
 	}
 }
 
 void CFileMonitorDlg::OnBnClickedButtonStart()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	if (dirname[0] == '\0') {
-		::MessageBox(NULL, _T("Ñ¡ÔñÄ¿Â¼´íÎó"), _T("´íÎó"), MB_ICONERROR);
+		::MessageBox(NULL, _T("é€‰æ‹©ç›®å½•é”™è¯¯"), _T("é”™è¯¯"), MB_ICONERROR);
 		return;
 	}
 	if (!start) {
-		button_start.SetWindowTextW(_T("¹Ø±Õ¼àÊÓ"));
+		button_start.SetWindowTextW(_T("å…³é—­ç›‘è§†"));
 		hmonitor = ::CreateThread(NULL, 0, monitor, NULL, 0, NULL);
 		listbox.EnableWindow(true);
 	} else {
-		button_start.SetWindowTextW(_T("¿ªÊ¼¼àÊÓ"));
+		button_start.SetWindowTextW(_T("å¼€å§‹ç›‘è§†"));
 		::TerminateThread(hmonitor, 0);
 		listbox.EnableWindow(false);
 	}
@@ -400,13 +393,13 @@ void createfile() {
 	std::wcscat(name, _T("\\"));
 	gettime(false);
 	std::wcscat(name, timebuff);
-	std::wcscat(name, _T("Ä¿Â¼ĞŞ¸Ä¼ÇÂ¼.txt"));
+	std::wcscat(name, _T("ç›®å½•ä¿®æ”¹è®°å½•.txt"));
 
 	char openname[MAX_PATH+50]; 
 	WideCharToMultiByte(CP_OEMCP, NULL, name, -1, openname, sizeof(name), NULL, false);
 	of.open(openname,  std::ofstream::out | std::ios::app);
 	if (!of) {
-		::MessageBox(NULL, _T("´´½¨´íÎó"), _T("´íÎó"), MB_ICONERROR);
+		::MessageBox(NULL, _T("åˆ›å»ºé”™è¯¯"), _T("é”™è¯¯"), MB_ICONERROR);
 		return;
 	}
 	WideCharToMultiByte(CP_OEMCP, NULL, filetxt, -1, filetxt2, sizeof(filetxt), NULL, false);
@@ -419,7 +412,7 @@ void closefile() {
 
 void CFileMonitorDlg::OnBnClickedButtonExport()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	BROWSEINFO bi; 
 
 	LPITEMIDLIST pidl; 
@@ -427,7 +420,7 @@ void CFileMonitorDlg::OnBnClickedButtonExport()
 	ZeroMemory(&bi, sizeof(bi));      
 	bi.hwndOwner = GetSafeHwnd(); 
 	bi.pszDisplayName = exportdir; 
-	bi.lpszTitle = _T("\nÇëÑ¡Ôñµ¼³öÎÄ¼şÄ¿Â¼:"); 
+	bi.lpszTitle = _T("\nè¯·é€‰æ‹©å¯¼å‡ºæ–‡ä»¶ç›®å½•:"); 
 	bi.ulFlags = BIF_RETURNONLYFSDIRS;  
 	pidl = SHBrowseForFolder(&bi); 
 	CString sPath;
@@ -448,14 +441,14 @@ void CFileMonitorDlg::OnBnClickedButtonExport()
 
 		createfile();
 		closefile();
-		::MessageBox(NULL, exportdir, _T("³É¹¦µ¼³öµ½"), MB_ICONINFORMATION);
+		::MessageBox(NULL, exportdir, _T("æˆåŠŸå¯¼å‡ºåˆ°"), MB_ICONINFORMATION);
 	}
 }
 
 
 void CFileMonitorDlg::OnBnClickedButtonClear()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	mylistbox->SetHorizontalExtent(0);
 	listbox.ResetContent();
 }
@@ -463,6 +456,6 @@ void CFileMonitorDlg::OnBnClickedButtonClear()
 
 void CFileMonitorDlg::OnBnClickedButtonExit()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	exit(0);
 }
