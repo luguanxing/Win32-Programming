@@ -6,40 +6,42 @@ using namespace std;
 MSG msg;
 HHOOK mhook=NULL;
 
-LRESULT WINAPI KeyProc(int code,WPARAM wParam,LPARAM lParam)
-{
+LRESULT WINAPI KeyProc(int code,WPARAM wParam,LPARAM lParam) {
 	LPKBDLLHOOKSTRUCT p=(LPKBDLLHOOKSTRUCT)lParam;
 	if(code<0)
 		CallNextHookEx(0,code,wParam,lParam);
-	if(code==HC_ACTION)
-	{
-		switch(wParam)
-		{
-		case WM_KEYDOWN:
-			if(p->vkCode==VK_LWIN||p->vkCode==VK_RWIN)
-			{
-				return 1;
-				break;
-			}
-		case WM_KEYUP:
-				if(p->vkCode==VK_LWIN||p->vkCode==VK_RWIN)
-			{
-				return 1;
-				break;
-			}
-		case WM_SYSKEYDOWN:
-			if(p->vkCode==VK_LWIN||p->vkCode==VK_RWIN)
-			{
-				return 1;
-				break;
-			}
-		case WM_SYSKEYUP:
-			if(p->vkCode==VK_LWIN||p->vkCode==VK_RWIN)
-			{
-				return 1;
-				break;
-			}
-		}
+	if(code==HC_ACTION) {
+		if(p->vkCode==VK_LWIN||p->vkCode==VK_RWIN)
+			return 1;
+		//	必要时可细分屏蔽类型
+		//	switch(wParam)
+		//	{
+		//	case WM_KEYDOWN:
+		//		if(p->vkCode==VK_LWIN||p->vkCode==VK_RWIN)
+		//		{
+		//			return 1;
+		//			break;
+		//		}
+		//	case WM_KEYUP:
+		//			if(p->vkCode==VK_LWIN||p->vkCode==VK_RWIN)
+		//		{
+		//			return 1;
+		//			break;
+		//		}
+		//	case WM_SYSKEYDOWN:
+		//		if(p->vkCode==VK_LWIN||p->vkCode==VK_RWIN)
+		//		{
+		//			return 1;
+		//			break;
+		//		}
+		//	case WM_SYSKEYUP:
+		//		if(p->vkCode==VK_LWIN||p->vkCode==VK_RWIN)
+		//		{
+		//			return 1;
+		//			break;
+		//		}
+		//	}
+		//
 	}
 	CallNextHookEx(0,code,wParam,lParam);
 	return 0;
