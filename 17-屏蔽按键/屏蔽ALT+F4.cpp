@@ -11,25 +11,24 @@ LRESULT WINAPI KeyProc(int code,WPARAM wParam,LPARAM lParam) {
 	if(code<0)
 		CallNextHookEx(0,code,wParam,lParam);
 	if(code==HC_ACTION) {
-		//·âËø ALT+F4
-		if((p->vkCode==VK_F4)&&((p->flags&0x20)>0))
+		if((p->vkCode==VK_F4)&&((p->flags&0x20)>0))	//å°é” ALT+F4
 			return 1;
 	}
 	CallNextHookEx(0,code,wParam,lParam);
 	return 0;
 }
 
-void messageloop() {	//ÏûÏ¢Ñ­»·£¬²»¶Ï´¦ÀíÏûÏ¢,(mfc´°¿ÚÏÂÒÑ°üº¬¿É²»ÓÃ,C++¿ØÖÆÌ¨´°¿ÚÏÂÊ¹ÓÃ)	
-while (GetMessage (&msg, NULL, 0, 0)) {
+void messageloop() {	//æ¶ˆæ¯å¾ªç¯ï¼Œä¸æ–­å¤„ç†æ¶ˆæ¯,(mfcçª—å£ä¸‹å·²åŒ…å«å¯ä¸ç”¨,C++æ§åˆ¶å°çª—å£ä¸‹ä½¿ç”¨)	
+	while (GetMessage (&msg, NULL, 0, 0)) {
 		TranslateMessage (&msg);
 		DispatchMessage (&msg);
 	};
 }
 
-void sethook() {	//½¨Á¢¹³×Ó
+void sethook() {	//å»ºç«‹é’©å­
 	mhook=::SetWindowsHookEx(WH_KEYBOARD_LL,KeyProc,GetModuleHandle(NULL),0);
 	if(mhook)
-		cout << "ÒÑ¾­ÆÁ±Îwin¼ü" << endl;
+		cout << "å·²ç»å±è”½winé”®" << endl;
 }
 
 
