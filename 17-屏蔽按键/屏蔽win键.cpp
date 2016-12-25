@@ -13,42 +13,38 @@ LRESULT WINAPI KeyProc(int code,WPARAM wParam,LPARAM lParam) {
 	if(code==HC_ACTION) {
 		if(p->vkCode==VK_LWIN||p->vkCode==VK_RWIN)
 			return 1;
-		//	必要时可细分屏蔽类型
-		//	switch(wParam)
-		//	{
-		//	case WM_KEYDOWN:
-		//		if(p->vkCode==VK_LWIN||p->vkCode==VK_RWIN)
-		//		{
-		//			return 1;
-		//			break;
-		//		}
-		//	case WM_KEYUP:
-		//			if(p->vkCode==VK_LWIN||p->vkCode==VK_RWIN)
-		//		{
-		//			return 1;
-		//			break;
-		//		}
-		//	case WM_SYSKEYDOWN:
-		//		if(p->vkCode==VK_LWIN||p->vkCode==VK_RWIN)
-		//		{
-		//			return 1;
-		//			break;
-		//		}
-		//	case WM_SYSKEYUP:
-		//		if(p->vkCode==VK_LWIN||p->vkCode==VK_RWIN)
-		//		{
-		//			return 1;
-		//			break;
-		//		}
-		//	}
-		//
+		/*
+		必要时可细分屏蔽类型
+		switch(wParam) {
+			case WM_KEYDOWN:
+				if(p->vkCode==VK_LWIN||p->vkCode==VK_RWIN) {
+					return 1;
+					break;
+				}
+			case WM_KEYUP:
+					if(p->vkCode==VK_LWIN||p->vkCode==VK_RWIN) {
+					return 1;
+					break;
+				}
+			case WM_SYSKEYDOWN:
+				if(p->vkCode==VK_LWIN||p->vkCode==VK_RWIN) {
+					return 1;
+					break;
+				}
+			case WM_SYSKEYUP:
+				if(p->vkCode==VK_LWIN||p->vkCode==VK_RWIN) {
+					return 1;
+					break;
+				}
+		}
+		*/	
 	}
 	CallNextHookEx(0,code,wParam,lParam);
 	return 0;
 }
 
 void messageloop() {	//消息循环，不断处理消息,(mfc窗口下已包含可不用,C++控制台窗口下使用)	
-while (GetMessage (&msg, NULL, 0, 0)) {
+	while (GetMessage (&msg, NULL, 0, 0)) {
 		TranslateMessage (&msg);
 		DispatchMessage (&msg);
 	};
