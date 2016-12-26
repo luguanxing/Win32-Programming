@@ -5,7 +5,16 @@ using namespace std;
 #define MAX 500
 
 HKEY hkey = NULL;
-char src[] = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";
+char src[] = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";	//win7可用
+
+/*
+64位目录:"HKEY_LOCAL_MACHINE\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"
+32位目录:"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Run"
+如果你是32位系统这么写没有问题，如果你是64位系统那就写进前一个目录里面去了。
+推荐的做法RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_WRITE | KEY_WOW64_64KEY, &hKey);
+*/
+
+
 char tar[MAX];
 
 int autostart() {
