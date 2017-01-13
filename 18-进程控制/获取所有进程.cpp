@@ -1,5 +1,5 @@
 #include <windows.h>
-#include <tlhelp32.h>	//ÉùÃ÷¿ìÕÕÍ·ÎÄ¼ş
+#include <tlhelp32.h>	//å£°æ˜å¿«ç…§å¤´æ–‡ä»¶
 #include <iostream>
 using namespace std;
 
@@ -7,20 +7,20 @@ int main() {
 	PROCESSENTRY32 pe32;
 	pe32.dwSize = sizeof(pe32);
 
-	HANDLE hprocesssnap = ::CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);	//µ±Ç°ËùÓĞ½ø³Ì¿ìÕÕ
-	if (hprocesssnap == INVALID_HANDLE_VALUE) {
-		cout << "CreateToolhelp32SnapshotÊ§°Ü" << endl;
+	HANDLE hpsnap = ::CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);	//å½“å‰æ‰€æœ‰è¿›ç¨‹å¿«ç…§
+	if (hpsnap == INVALID_HANDLE_VALUE) {
+		cout << "CreateToolhelp32Snapshotå¤±è´¥" << endl;
 		return -1;
 	}
 
-	BOOL bnext = ::Process32First(hprocesssnap, &pe32);	//±éÀúµ±Ç°½ø³Ì¿ìÕÕ
+	BOOL bnext = ::Process32First(hpsnap, &pe32);	//éå†å½“å‰è¿›ç¨‹å¿«ç…§
 	while (bnext) {
-		cout << "½ø³ÌÃû³Æ:" << pe32.szExeFile << endl;
-		cout << "½ø³ÌIDºÅ:" << pe32.th32ProcessID << endl << endl;
-		bnext = ::Process32Next(hprocesssnap, &pe32);
+		cout << "è¿›ç¨‹åç§°:" << pe32.szExeFile << endl;
+		cout << "è¿›ç¨‹IDå·:" << pe32.th32ProcessID << endl << endl;
+		bnext = ::Process32Next(hpsnap, &pe32);
 	}
 
-	::CloseHandle(hprocesssnap);
+	::CloseHandle(hpsnap);
 
 	return 0;
 }
