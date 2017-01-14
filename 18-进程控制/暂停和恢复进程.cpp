@@ -35,7 +35,7 @@ int ProcProcess(LPWSTR lpFillName) {
 			::MessageBox(NULL,_T("目标已冻结"), _T("确认"), MB_ICONINFORMATION);
 			::Sleep(5000);
 
-			int ret = ::MessageBox(NULL,_T("如何处理选择目标进程?YES关闭NO恢复"), _T("确认"), MB_YESNO | MB_ICONQUESTION);
+			int ret = ::MessageBox(NULL,_T("如何处理选择目标进程?YES关闭NO恢复"), _T("确认"), MB_YESNO | MB_ICONQUESTION);		//冻结或恢复进程,这里好像如果不连着冻结马上恢复的话就恢复不了
 			if (IDYES == ret) {				 //关闭
 				TerminateProcess(hProcess, 0);
 			} else {									 //不关闭, 恢复挂起状态
