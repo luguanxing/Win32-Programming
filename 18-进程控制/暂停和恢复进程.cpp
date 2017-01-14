@@ -2,121 +2,97 @@
 #include <Tlhelp32.h>
 #include <stdio.h>
 #include <conio.h>
+#include <tchar.h>
+#include <string>
+#include <iostream>
 
-typedef  DWORD (WINAPI *SUSPENDPROCESS)(HANDLE);
+typedef  DWORD (WINAPI *SUSPENDPROCESS)(HANDLE);    //ä½¿ç”¨æœªå…¬å¼€APIå‡½æ•°
 typedef  DWORD (WINAPI *RESUMEPROCESS)(HANDLE);
 
 SUSPENDPROCESS SuspendProcess;
 RESUMEPROCESS ResumeProcess;
 
 
-int ProcProcess(LPSTR lpFillName)
-{
-    PROCESSENTRY32    stProcess;
-    stProcess.dwSize = sizeof (PROCESSENTRY32);
+int ProcProcess(LPWSTR lpFillName) {
+	PROCESSENTRY32	stProcess;
+	stProcess.dwSize = sizeof (PROCESSENTRY32);
+	HANDLE hSnapShot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+	if (hSnapShot ==NULL ) {		 //åˆ›å»ºè¿›ç¨‹å¿«ç…§å¤±è´¥
+		return 0;
+	}
 
-    HANDLE hSnapShot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+	bool isfound = false;
+	BOOL bLoop = Process32First(hSnapShot, &stProcess);
+	while (bLoop) {
+		CharLower(stProcess.szExeFile);
+		if (0 == lstrcmp(lpFillName, stProcess.szExeFile)) {
+			HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, stProcess.th32ProcessID);
+			if (NULL == hProcess) {		 //æ‰“å¼€è¿›ç¨‹å¤±è´¥
+				return 0;
+			}
+			isfound = true;
+			SuspendProcess(hProcess);
+			::MessageBox(NULL,_T("ç›®æ ‡å·²å†»ç»“"), _T("ç¡®è®¤"), MB_ICONINFORMATION);
+			::Sleep(5000);
 
-    if (NULL == hSnapShot) {
-        return 0; //´´½¨½ø³Ì¿ìÕÕÊ§°Ü
-    }
-
-    BOOL bLoop = Process32First(hSnapShot, &stProcess);
-    while (bLoop)
-    {
-        CharLower(stProcess.szExeFile);
-        if (0 == lstrcmp(lpFillName, stProcess.szExeFile))
-        {
-            //MessageBox(NULL, (LPCTSTR)TEXT("ÓĞ½ø³Ì"), (LPCTSTR)TEXT("ĞÅÏ¢"), MB_OK | MB_ICONINFORMATION);
-            HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, stProcess.th32ProcessID);
-            if (NULL == hProcess) {
-                //´ò¿ª½ø³ÌÊ§°Ü
-                return 0;
-            }
-            SuspendProcess(hProcess);
-            int ret = MessageBox(NULL, (LPCTSTR)TEXT("Ä¿±ê½ø³ÌÊÇ·ñ¹Ø±Õ?"), (LPCTSTR)TEXT("Ñ¯ÎÊ"), MB_YESNO | MB_ICONQUESTION);
-            if (IDYES == ret) {
-                //¹Ø±Õ
-                TerminateProcess(hProcess, 0);
-            } else {
-                //²»¹Ø±Õ, È¡Ïû½ø³Ì¹ÒÆğ×´Ì¬
-                lpFillName[0] = 0;
-                ResumeProcess(hProcess);
-            }
-
-            CloseHandle(hProcess);
-
-        }
-        bLoop = Process32Next(hSnapShot, &stProcess);
-    }
-
-    CloseHandle(hSnapShot); //¹Ø±Õ½ø³Ì¿ìÕÕ
-    return 1;
+			int ret = ::MessageBox(NULL,_T("å¦‚ä½•å¤„ç†é€‰æ‹©ç›®æ ‡è¿›ç¨‹?YESå…³é—­NOæ¢å¤"), _T("ç¡®è®¤"), MB_YESNO | MB_ICONQUESTION);
+			if (IDYES == ret) {				 //å…³é—­
+				TerminateProcess(hProcess, 0);
+			} else {									 //ä¸å…³é—­, æ¢å¤æŒ‚èµ·çŠ¶æ€
+				lpFillName[0] = 0;
+				ResumeProcess(hProcess);
+			}
+			CloseHandle(hProcess);
+		}
+		bLoop = Process32Next(hSnapShot, &stProcess);
+	}
+	if (!isfound)
+		::MessageBox(NULL,_T("æ‰¾ä¸åˆ°ç›®æ ‡"), _T("å¤±è´¥"), MB_ICONINFORMATION);
+	CloseHandle(hSnapShot); //å…³é—­è¿›ç¨‹å¿«ç…§
+	return 1;
 }
 
-HINSTANCE InitDll()
-{
-    HINSTANCE    hDllInstance = LoadLibrary((LPCSTR)TEXT("NTDLL.DLL"));
-    if (NULL == hDllInstance) {
-        MessageBox(NULL,
-            (LPCSTR)TEXT("NTDll.dllÎÄ¼ş¶ªÊ§»ò×°ÔØÊ§°Ü, ³ÌĞò¹¦ÄÜÎŞ·¨ÊµÏÖ"),
-            (LPCSTR)TEXT("Ê§°Ü"), MB_OK | MB_ICONERROR);
-        return NULL;
-    }
+HINSTANCE InitDll() {
+	HINSTANCE hDllInstance = LoadLibrary(_T("NTDLL.DLL"));	//åŠ è½½nt.dll
+	if (hDllInstance == NULL) {
+		MessageBox(NULL, _T("NTDll.dllæ–‡ä»¶ä¸¢å¤±æˆ–è£…è½½å¤±è´¥, ç¨‹åºåŠŸèƒ½æ— æ³•å®ç°"), _T("å¤±è´¥"), MB_ICONERROR);
+		return NULL;
+	}
    
-    SuspendProcess = (SUSPENDPROCESS)GetProcAddress(hDllInstance, (LPCSTR)TEXT
-
-("ZwSuspendProcess"));
-    if (NULL == SuspendProcess) {
-        MessageBox(NULL,
-            (LPCSTR)TEXT("ntdll.dll´ò²»µ½º¯ÊıZwSuspendProcess"),
-            (LPCSTR)TEXT("Ê§°Ü"), MB_OK | MB_ICONERROR);
-        CloseHandle(hDllInstance);
-        return NULL;
-    }
+	SuspendProcess = (SUSPENDPROCESS)GetProcAddress(hDllInstance, "ZwSuspendProcess");	//åŠ è½½SuspendProcess
+	if (NULL == SuspendProcess) {
+		MessageBox(NULL, _T("ntdll.dllæ‰“ä¸åˆ°å‡½æ•°ZwSuspendProcess"), _T("å¤±è´¥"), MB_ICONERROR);
+		CloseHandle(hDllInstance);
+		return NULL;
+	}
    
-    ResumeProcess = (RESUMEPROCESS)GetProcAddress(hDllInstance, (LPCSTR)TEXT
-
-("ZwResumeProcess"));
-    if (NULL == ResumeProcess) {
-        MessageBox(NULL,
-            (LPCSTR)TEXT("ntdll.dll´ò²»µ½º¯ÊıResumeProcess"),
-            (LPCSTR)TEXT("Ê§°Ü"), MB_OK | MB_ICONERROR);
-        CloseHandle(hDllInstance);
-        return NULL;
-    }
-    return hDllInstance;
+	ResumeProcess = (RESUMEPROCESS)GetProcAddress(hDllInstance, "ZwResumeProcess");	//åŠ è½½ResumeProcess
+	if (NULL == ResumeProcess) {
+		MessageBox(NULL, _T("ntdll.dllæ‰“ä¸åˆ°å‡½æ•°ResumeProcess"), _T("å¤±è´¥"), MB_ICONERROR);
+		CloseHandle(hDllInstance);
+		return NULL;
+	}
+	return hDllInstance;
 }
 
-void Exit(HINSTANCE hDllInstance)
-{
-    FreeLibrary(hDllInstance);
+void Exit(HINSTANCE hDllInstance) {
+	FreeLibrary(hDllInstance);
 }
 
-DWORD WINAPI ThreadProc(LPVOID lpParameter)
-{
-    while (TRUE)
-    {
-        ProcProcess((LPSTR)lpParameter);
-        Sleep(100);
-    }
-    return 0;
-}
+int main() {
+	WCHAR lpFileName[MAX_PATH];
+	CHAR buff[MAX_PATH];
 
+	printf("è¾“å…¥è¿›ç¨‹åç§°:\n");
+	scanf("%s", buff);
+	MultiByteToWideChar (CP_ACP, 0, buff, -1, lpFileName, MAX_PATH);
 
-int main(int argc, char* argv[])
-{
-    TCHAR    lpFileName[MAX_PATH];
-    printf("ÇëÊäÈë½ø³ÌÃû³Æ(»á×ª³ÉĞ¡Ğ´):");
-    scanf("%s", lpFileName);
-
-    CharLower(lpFileName);    //×ª³ÉĞ¡Ğ´
+	CharLower(lpFileName);	//è½¬æˆå°å†™
    
-    HINSTANCE hDllInstance = InitDll();
+	HINSTANCE hDllInstance = InitDll();
 
-    HANDLE hThread = CreateThread(NULL, 0, ThreadProc, (LPVOID)lpFileName, NULL, NULL);
-    CloseHandle(hThread);
-    Sleep(20000);
-    Exit(hDllInstance);
-    return 0;
+	ProcProcess(lpFileName);
+
+	Exit(hDllInstance);
+	return 0;
 }
