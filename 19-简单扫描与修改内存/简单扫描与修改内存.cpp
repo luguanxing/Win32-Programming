@@ -19,6 +19,9 @@ class CMemFinder {
 		virtual ~CMemFinder();
 
 		virtual void ShowList();	//操作方法
+		virtual void set(DWORD processid);
+		virtual void set(WCHAR *processname);
+		virtual void set(char &windowname);
 		virtual BOOL FindFirst(DWORD dwVaule);
 		virtual BOOL FindNext(DWORD dwVaule);
 		virtual BOOL modify(DWORD dwAddr, DWORD dwValue);
@@ -87,6 +90,28 @@ CMemFinder::~CMemFinder() {
 
 }
 
+void CMemFinder::ShowList() {
+	if (!m_dwlistnum)
+		printf("无数据\n");
+	for (int i = 0; i < m_dwlistnum; i++)
+		printf("%08x\n", m_dwlist[i]);
+}
+
+void CMemFinder::set(DWORD processid) {
+	CMemFinder ce(processid);
+	this->m_hprocess = ce.m_hprocess;
+}
+
+void CMemFinder::set(WCHAR *processname) {
+	CMemFinder ce(processname);
+	this->m_hprocess = ce.m_hprocess;
+}
+
+void CMemFinder::set(char &windowname) {
+	CMemFinder ce(windowname);
+	this->m_hprocess = ce.m_hprocess;
+}
+
 BOOL CMemFinder::ComparePage(DWORD dwBaseAddr, DWORD dwValue) {	//按页读取内存
 	BYTE arBytes[4096];
 	if (!::ReadProcessMemory(m_hprocess, (LPCVOID)dwBaseAddr, arBytes, 4096, NULL))
@@ -137,13 +162,6 @@ BOOL CMemFinder::FindNext(DWORD dwValue) {	//再次扫描
 
 BOOL CMemFinder::modify(DWORD dwAddr, DWORD dwValue) {
 	return ::WriteProcessMemory(m_hprocess, (LPVOID)dwAddr, &dwValue, sizeof(DWORD), NULL);
-}
-
-void CMemFinder::ShowList() {
-	if (!m_dwlistnum)
-		printf("无数据\n");
-	for (int i = 0; i < m_dwlistnum; i++)
-		printf("%08x\n", m_dwlist[i]);
 }
 
 int main() {
