@@ -5,35 +5,41 @@
 #define MAXSIZE 5000
 
 class CMemFinder {
-	protected:
+	public:
 		int m_dwlistnum;
 		BOOL m_bfirst;
 		HANDLE m_hprocess;
 		DWORD m_dwlist[MAXSIZE];
 		virtual BOOL ComparePage(DWORD dwBaseAddr, DWORD dwValue);
-	public:
-		CMemFinder(DWORD processid);	//³õÊ¼º¯ÊıºÍÎö¹¹º¯Êı
+
+		CMemFinder();	//åˆå§‹å‡½æ•°å’Œææ„å‡½æ•°
+		CMemFinder(DWORD processid);
 		CMemFinder(WCHAR *processname);
 		CMemFinder(char &windowname);
 		virtual ~CMemFinder();
 
-		virtual void ShowList();	//²Ù×÷·½·¨
+		virtual void ShowList();	//æ“ä½œæ–¹æ³•
 		virtual BOOL FindFirst(DWORD dwVaule);
 		virtual BOOL FindNext(DWORD dwVaule);
 		virtual BOOL modify(DWORD dwAddr, DWORD dwValue);
 };
 
-CMemFinder::CMemFinder(DWORD processid) {		//¸ù¾İ½ø³ÌidÃûÑ°ÕÒ²¢´ò¿ª½ø³Ì
+CMemFinder::CMemFinder() {
+	m_dwlistnum = 0;
+	m_hprocess = NULL;
+}
+
+CMemFinder::CMemFinder(DWORD processid) {		//æ ¹æ®è¿›ç¨‹idåå¯»æ‰¾å¹¶æ‰“å¼€è¿›ç¨‹
 	m_dwlistnum = 0;
 	m_hprocess = ::OpenProcess(PROCESS_ALL_ACCESS, false, processid);
 	if (NULL ==m_hprocess) {
-		printf( "´ò¿ª½ø³ÌÊ§°Ü\n");
+		printf( "æ‰“å¼€è¿›ç¨‹å¤±è´¥\n");
 		return;
 	}
-	printf( "´ò¿ª½ø³Ì³É¹¦\n");
+	printf( "æ‰“å¼€è¿›ç¨‹æˆåŠŸ\n");
 }
 
-CMemFinder::CMemFinder(WCHAR *processname) {		//¸ù¾İ½ø³ÌÃûÑ°ÕÒ²¢´ò¿ª½ø³Ì
+CMemFinder::CMemFinder(WCHAR *processname) {		//æ ¹æ®è¿›ç¨‹åå¯»æ‰¾å¹¶æ‰“å¼€è¿›ç¨‹
 	m_dwlistnum = 0;
 	PROCESSENTRY32	stProcess;
 	stProcess.dwSize = sizeof (PROCESSENTRY32);
@@ -49,19 +55,19 @@ CMemFinder::CMemFinder(WCHAR *processname) {		//¸ù¾İ½ø³ÌÃûÑ°ÕÒ²¢´ò¿ª½ø³Ì
 		if (0 == lstrcmp((LPCWSTR)processname, stProcess.szExeFile)) {
 			m_hprocess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, stProcess.th32ProcessID);
 			if (NULL ==m_hprocess) {
-				printf( "´ò¿ª½ø³ÌÊ§°Ü\n");
+				printf( "æ‰“å¼€è¿›ç¨‹å¤±è´¥\n");
 				return;
 			}
-			printf( "´ò¿ª½ø³Ì³É¹¦\n");
+			printf( "æ‰“å¼€è¿›ç¨‹æˆåŠŸ\n");
 			isfound = true;
 		}
 		bLoop = Process32Next(hSnapShot, &stProcess);
 	}
 	if (!isfound)
-		printf( "ÕÒ²»µ½Ä¿±ê\n");
+		printf( "æ‰¾ä¸åˆ°ç›®æ ‡\n");
 }
 
-CMemFinder::CMemFinder(char &windowname) {		//¸ù¾İ´°¿ÚÃûÑ°ÕÒ²¢´ò¿ª½ø³Ì
+CMemFinder::CMemFinder(char &windowname) {		//æ ¹æ®çª—å£åå¯»æ‰¾å¹¶æ‰“å¼€è¿›ç¨‹
 	m_dwlistnum = 0;
 	WCHAR wbuff[255];
 	int dwNum=sizeof(windowname);
@@ -71,20 +77,20 @@ CMemFinder::CMemFinder(char &windowname) {		//¸ù¾İ´°¿ÚÃûÑ°ÕÒ²¢´ò¿ª½ø³Ì
     GetWindowThreadProcessId(h, &processid);
     m_hprocess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processid);
 	if (NULL ==m_hprocess) {
-		printf( "´ò¿ª½ø³ÌÊ§°Ü\n");
+		printf( "æ‰“å¼€è¿›ç¨‹å¤±è´¥\n");
 		return;
 	}
-	printf( "´ò¿ª½ø³Ì³É¹¦\n");
+	printf( "æ‰“å¼€è¿›ç¨‹æˆåŠŸ\n");
 }
 
 CMemFinder::~CMemFinder() {
 
 }
 
-BOOL CMemFinder::ComparePage(DWORD dwBaseAddr, DWORD dwValue) {	//°´Ò³¶ÁÈ¡ÄÚ´æ
+BOOL CMemFinder::ComparePage(DWORD dwBaseAddr, DWORD dwValue) {	//æŒ‰é¡µè¯»å–å†…å­˜
 	BYTE arBytes[4096];
 	if (!::ReadProcessMemory(m_hprocess, (LPCVOID)dwBaseAddr, arBytes, 4096, NULL))
-		return false;		//²»¿É¶Á£¬·µ»ØÊ§°Ü
+		return false;		//ä¸å¯è¯»ï¼Œè¿”å›å¤±è´¥
 	DWORD *pdw;
 	for (int i = 0; i < 4 * 1024 - 3; i++) {
 		pdw = (DWORD*)&arBytes[i];
@@ -102,23 +108,23 @@ BOOL CMemFinder::FindFirst(DWORD dwValue) {
 	const DWORD dwOnePage = 4*1024;
 	if (m_hprocess == NULL)
 		return false;
-	//²é¿´²Ù×÷ÏµÍ³ÀàĞÍ£¬¾ö¶¨¿ªÊ¼µØÖ·
+	//æŸ¥çœ‹æ“ä½œç³»ç»Ÿç±»å‹ï¼Œå†³å®šå¼€å§‹åœ°å€
 	DWORD dwBase;
 	OSVERSIONINFO vi = {sizeof(vi)};
 	::GetVersionEx(&vi);
 	if (vi.dwPlatformId == VER_PLATFORM_WIN32_WINDOWS)
-		dwBase = 4*1024*1024;	//98ÏµÁĞ4MB
+		dwBase = 4*1024*1024;	//98ç³»åˆ—4MB
 	else
-		dwBase = 640*1024;	//windowsNTÏµÁĞ64KB
+		dwBase = 640*1024;	//windowsNTç³»åˆ—64KB
 	for(; dwBase < 2*dwGB; dwBase += dwOnePage)
 		ComparePage(dwBase, dwValue);
 	return true;
 }
 
-BOOL CMemFinder::FindNext(DWORD dwValue) {	//ÔÙ´ÎÉ¨Ãè
+BOOL CMemFinder::FindNext(DWORD dwValue) {	//å†æ¬¡æ‰«æ
 	int orgnum = m_dwlistnum;
 	m_dwlistnum = 0;
-	BOOL flag = false;	//¼ÙÉèÊ§°Ü
+	BOOL flag = false;	//å‡è®¾å¤±è´¥
 	DWORD dwReadValue;
 	for (int i = 0; i < orgnum; i++)
 		if (::ReadProcessMemory(m_hprocess, (LPVOID)m_dwlist[i], &dwReadValue, sizeof(DWORD),NULL))
@@ -135,21 +141,21 @@ BOOL CMemFinder::modify(DWORD dwAddr, DWORD dwValue) {
 
 void CMemFinder::ShowList() {
 	if (!m_dwlistnum)
-		printf("ÎŞÊı¾İ\n");
+		printf("æ— æ•°æ®\n");
 	for (int i = 0; i < m_dwlistnum; i++)
 		printf("%08x\n", m_dwlist[i]);
 }
 
 int main() {
 	WCHAR ws[]= TEXT("test.exe");
-	CMemFinder ce(ws);	//´Ó½ø³ÌÃû²éÕÒ
-	printf("µÚÒ»´Î²éÕÒ=========\n");
+	CMemFinder ce(ws);	//ä»è¿›ç¨‹åæŸ¥æ‰¾
+	printf("ç¬¬ä¸€æ¬¡æŸ¥æ‰¾=========\n");
 	ce.FindFirst(100);
 	ce.ShowList();
-	printf("µÚ¶ş´Î²éÕÒ=========\n");
+	printf("ç¬¬äºŒæ¬¡æŸ¥æ‰¾=========\n");
 	ce.FindNext(101);
 	ce.ShowList();
-	printf("ĞŞ¸Ä=========\n");
+	printf("ä¿®æ”¹=========\n");
 	ce.modify(1638212, 200);
 	return 0;
 }
