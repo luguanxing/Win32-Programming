@@ -12,7 +12,7 @@
     监视目录更改<br><br><br><br><br>
     ![image](https://github.com/luguanxing/Windows-C-Projects/raw/master/18-%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/pictures/3.jpg?raw=true)<br>
     进程控制<br><br><br><br><br>
-    ![image](https://github.com/luguanxing/Windows-C-Projects/raw/master/19-%E7%AE%80%E5%8D%95%E6%89%AB%E6%8F%8F%E4%B8%8E%E4%BF%AE%E6%94%B9%E5%86%85%E5%AD%98/pictures/getprocess.gif?raw=true)<br>
+    ![image](https://github.com/luguanxing/Windows-C-Projects/raw/master/19-%E7%AE%80%E5%8D%95%E6%89%AB%E6%8F%8F%E4%B8%8E%E4%BF%AE%E6%94%B9%E5%86%85%E5%AD%98/pictures/0.jpg?raw=true)<br>
     内存扫描与修改<br><br><br><br><br>
     
 ------
