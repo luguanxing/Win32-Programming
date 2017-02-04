@@ -22,5 +22,6 @@
     简易资源管理器<br><br><br><br><br>   
      ![image](https://github.com/luguanxing/Windows-C-Projects/raw/master/21-%E5%80%92%E8%AE%A1%E6%97%B6%E5%99%A8/pictures/1.jpg?raw=true)<br>
     倒计时器<br><br><br><br><br>     
-
+     ![image](https://github.com/luguanxing/Windows-C-Projects/raw/master/22-%E5%BC%82%E5%BD%A2%E7%AA%97%E5%8F%A3/pictures/1.gif?raw=true)<br>
+    异形窗口<br><br><br><br><br>   
 
