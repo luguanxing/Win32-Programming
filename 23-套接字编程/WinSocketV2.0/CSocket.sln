@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Socket_Server", "Socket_Server\Socket_Server.vcxproj", "{E997C5F5-86C6-46E0-8B6F-B6F4BC33E543}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Socket_Client", "Socket_Client\Socket_Client.vcxproj", "{65CDE665-23FE-4613-93EF-A030925EF536}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E997C5F5-86C6-46E0-8B6F-B6F4BC33E543}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E997C5F5-86C6-46E0-8B6F-B6F4BC33E543}.Debug|Win32.Build.0 = Debug|Win32
+		{E997C5F5-86C6-46E0-8B6F-B6F4BC33E543}.Release|Win32.ActiveCfg = Release|Win32
+		{E997C5F5-86C6-46E0-8B6F-B6F4BC33E543}.Release|Win32.Build.0 = Release|Win32
+		{65CDE665-23FE-4613-93EF-A030925EF536}.Debug|Win32.ActiveCfg = Debug|Win32
+		{65CDE665-23FE-4613-93EF-A030925EF536}.Debug|Win32.Build.0 = Debug|Win32
+		{65CDE665-23FE-4613-93EF-A030925EF536}.Release|Win32.ActiveCfg = Release|Win32
+		{65CDE665-23FE-4613-93EF-A030925EF536}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
