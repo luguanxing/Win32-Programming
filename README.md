@@ -24,6 +24,7 @@
     倒计时器<br><br><br><br><br>     
      ![image](https://github.com/luguanxing/Windows-C-Projects/raw/master/22-%E5%BC%82%E5%BD%A2%E7%AA%97%E5%8F%A3/pictures/1.gif?raw=true)<br>
     异形窗口<br><br><br><br><br>   
-     ![image](https://github.com/luguanxing/Windows-C-Projects/raw/master/23-%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B/pictures/server.jpg?raw=true)<br>
-     ![image](https://github.com/luguanxing/Windows-C-Projects/raw/master/23-%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B/pictures/client.jpg?raw=true)<br>
+     ![image](https://github.com/luguanxing/Windows-C-Projects/raw/master/23-%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B/pictures/demo1.gif?raw=true)<br>
     套接字编程<br><br><br><br><br>   
+     ![image](https://github.com/luguanxing/Windows-C-Projects/raw/master/24-%E7%AA%97%E5%8F%A3%E6%9F%A5%E7%9C%8B%E5%99%A8/pictures/spy++1.gif?raw=true)<br>
+    窗口查看器<br><br><br><br><br>   
