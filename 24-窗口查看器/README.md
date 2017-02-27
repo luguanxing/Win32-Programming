@@ -7,7 +7,7 @@
 > * 测试
 
 ------
-## 效果
+## 设计
 ![image](https://github.com/luguanxing/Windows-C-Projects/blob/master/24-%E7%AA%97%E5%8F%A3%E6%9F%A5%E7%9C%8B%E5%99%A8/pictures/0.jpg?raw=true)<br>
 ![image](https://github.com/luguanxing/Windows-C-Projects/blob/master/24-%E7%AA%97%E5%8F%A3%E6%9F%A5%E7%9C%8B%E5%99%A8/pictures/1.jpg?raw=true)<br>
 <br><br><br>
