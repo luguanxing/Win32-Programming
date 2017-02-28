@@ -2,7 +2,7 @@
 ------
 
 采用面对对象的方法，仿造QQ的截图工具，写一个能保存鼠标拖动，用红色标记所圈出区域的截图软件
-> * 功能
+> * 效果
 > * 设计
 > * 测试
 
@@ -13,7 +13,7 @@
 
 ## 设计
 ![image](https://github.com/luguanxing/Windows-C-Projects/blob/master/25-MFC%E6%88%AA%E5%B1%8F/pictures/class.jpg?raw=true)<br>
-MyScreenShot类的设计<br>
+MyScreenShot类的设计，在对话框中进行响应并调用对应的接口<br>
 <br><br><br>
 
 ## 测试
