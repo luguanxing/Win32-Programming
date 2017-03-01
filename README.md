@@ -5,7 +5,7 @@
 ###API编程:
     开机自动启动、U盘自动复制、键盘记录器、DLL注入、简单HOOKAPI、简单DLL劫持、文件锁、加密文件病毒、自删除程序、获取窗口RGB颜色、互斥体单实例、屏蔽按键、透明度调整助手、套接字编程
 ###MFC编程:
-    网页自动刷新器、监视目录更改、内存扫描与修改、进程控制、简易资源管理器、倒计时器、异形窗口、套接字编程、窗口查看器
+    网页自动刷新器、监视目录更改、内存扫描与修改、进程控制、简易资源管理器、倒计时器、异形窗口、套接字编程、窗口查看器、MFC截屏
     
 ------
 
@@ -28,3 +28,5 @@
     套接字编程<br><br><br><br><br>   
      ![image](https://github.com/luguanxing/Windows-C-Projects/raw/master/24-%E7%AA%97%E5%8F%A3%E6%9F%A5%E7%9C%8B%E5%99%A8/pictures/spy++1.gif?raw=true)<br>
     窗口查看器<br><br><br><br><br>   
+     ![image](https://github.com/luguanxing/Windows-C-Projects/raw/master/25-MFC%E6%88%AA%E5%B1%8F/pictures/screenshot.gif?raw=true)<br>
+    MFC截屏<br><br><br><br><br>   
