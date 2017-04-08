@@ -7,7 +7,7 @@
     开机自动启动、U盘自动复制、键盘记录器、DLL注入、简单HOOKAPI、简单DLL劫持、文件锁、加密文件病毒、自删除程序、获取窗口RGB颜色、互斥体单实例、屏蔽按键、透明度调整助手、套接字编程
     
 ### MFC编程:
-    网页自动刷新器、监视目录更改、内存扫描与修改、进程控制、简易资源管理器、倒计时器、异形窗口、套接字编程、窗口查看器、MFC截屏
+    网页自动刷新器、监视目录更改、内存扫描与修改、进程控制、简易资源管理器、倒计时器、异形窗口、套接字编程、窗口查看器、MFC截屏、文件按键输入器、驱动加载卸载工具
 
 
 ------
@@ -29,3 +29,5 @@
 窗口查看器<br><br><br><br><br>   
  ![image](https://github.com/luguanxing/Windows-C-Projects/raw/master/25-MFC%E6%88%AA%E5%B1%8F/pictures/screenshot.gif?raw=true)<br>
 MFC截屏<br><br><br><br><br>   
+ ![image](https://github.com/luguanxing/Win32-Programming/raw/master/26-%E6%96%87%E4%BB%B6%E6%8C%89%E9%94%AE%E8%BE%93%E5%85%A5%E5%99%A8/pictures/2.gif?raw=true)<br>
+文件按键输入器<br><br><br><br><br> 
