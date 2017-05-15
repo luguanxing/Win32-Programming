@@ -31,3 +31,5 @@
 MFC截屏<br><br><br><br><br>   
  ![image](https://github.com/luguanxing/Win32-Programming/raw/master/26-%E6%96%87%E4%BB%B6%E6%8C%89%E9%94%AE%E8%BE%93%E5%85%A5%E5%99%A8/pictures/2.gif?raw=true)<br>
 文件按键输入器<br><br><br><br><br> 
+ ![image](https://github.com/luguanxing/Win32-Programming/raw/master/29-%E9%9A%90%E8%97%8F%E7%9B%98%E7%AC%A6/pictures/DiskHider.gif?raw=true)<br>
+隐藏盘符<br><br><br><br><br> 
