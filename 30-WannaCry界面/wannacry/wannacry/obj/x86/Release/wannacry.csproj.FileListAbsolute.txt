@@ -1,0 +1,11 @@
+C:\Users\Administrator\documents\visual studio 2010\Projects\wannacry\wannacry\bin\Release\wannacry.exe
+C:\Users\Administrator\documents\visual studio 2010\Projects\wannacry\wannacry\bin\Release\wannacry.pdb
+C:\Users\Administrator\documents\visual studio 2010\Projects\wannacry\wannacry\obj\x86\Release\MainWindow.baml
+C:\Users\Administrator\documents\visual studio 2010\Projects\wannacry\wannacry\obj\x86\Release\MainWindow.g.cs
+C:\Users\Administrator\documents\visual studio 2010\Projects\wannacry\wannacry\obj\x86\Release\App.g.cs
+C:\Users\Administrator\documents\visual studio 2010\Projects\wannacry\wannacry\obj\x86\Release\wannacry_MarkupCompile.cache
+C:\Users\Administrator\documents\visual studio 2010\Projects\wannacry\wannacry\obj\x86\Release\wannacry.g.resources
+C:\Users\Administrator\documents\visual studio 2010\Projects\wannacry\wannacry\obj\x86\Release\wannacry.Properties.Resources.resources
+C:\Users\Administrator\documents\visual studio 2010\Projects\wannacry\wannacry\obj\x86\Release\wannacry.csproj.GenerateResource.Cache
+C:\Users\Administrator\documents\visual studio 2010\Projects\wannacry\wannacry\obj\x86\Release\wannacry.exe
+C:\Users\Administrator\documents\visual studio 2010\Projects\wannacry\wannacry\obj\x86\Release\wannacry.pdb
